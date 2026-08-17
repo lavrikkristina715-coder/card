@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberShot Premium | Цифровая Визитка</title>
+    <title>CyberShot Premium | Visual AI Studio</title>
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
         * {
@@ -12,8 +12,9 @@
             padding: 0;
             font-family: 'Montserrat', sans-serif;
         }
+        /* Живой анимированный фон с эффектом дыма и золотого тумана */
         body {
-            background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
+            background: #050505;
             color: #ffffff;
             display: flex;
             justify-content: center;
@@ -21,95 +22,103 @@
             min-height: 100vh;
             padding: 30px 20px;
             overflow-x: hidden;
+            position: relative;
         }
-        body::before {
+        body::before, body::after {
             content: '';
             position: absolute;
-            width: 150%;
-            height: 150%;
-            background: linear-gradient(45deg, transparent 45%, rgba(212, 175, 55, 0.03) 50%, transparent 55%);
-            animation: shineBg 8s infinite linear;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
             z-index: 0;
             pointer-events: none;
         }
-        @keyframes shineBg {
-            0% { transform: translate(-30%, -30%) rotate(0deg); }
-            100% { transform: translate(-10%, -10%) rotate(360deg); }
+        body::before {
+            top: -200px;
+            left: -200px;
+            animation: smokeMove 12s infinite alternate ease-in-out;
         }
+        body::after {
+            bottom: -200px;
+            right: -200px;
+            animation: smokeMove 18s infinite alternate-reverse ease-in-out;
+        }
+        @keyframes smokeMove {
+            0% { transform: translate(0, 0) scale(1); filter: blur(50px); }
+            100% { transform: translate(100px, 80px) scale(1.2); filter: blur(80px); }
+        }
+        /* Карточка с эффектом матового стекла (Glassmorphism) */
         .card-container {
-            background: rgba(20, 20, 20, 0.6);
-            border: 1px solid rgba(214, 175, 55, 0.4);
+            background: rgba(20, 20, 20, 0.7);
+            border: 1px solid rgba(212, 175, 55, 0.35);
             border-radius: 24px;
             width: 100%;
-            max-width: 420px;
-            padding: 40px 25px;
+            max-width: 400px;
+            padding: 40px 24px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(214, 175, 55, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(212, 175, 55, 0.03);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             position: relative;
             z-index: 1;
         }
         .avatar-container {
-            width: 110px;
-            height: 110px;
+            width: 115px;
+            height: 115px;
             margin: 0 auto 25px;
             border-radius: 50%;
             border: 2px solid #d4af37;
             background-size: cover;
             background-position: center;
             box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+            background-color: #111;
         }
         h1 {
             font-size: 28px;
             font-weight: 700;
             color: #ffffff;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
         .subtitle {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: #d4af37;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             text-transform: uppercase;
             letter-spacing: 3px;
         }
         .description {
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 300;
             color: #e0e0e0;
             line-height: 1.6;
             margin-bottom: 35px;
         }
         .portfolio-title {
-            font-size: 13px;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: #888888;
+            color: #777777;
             margin-bottom: 15px;
             font-weight: 600;
         }
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 35px;
         }
         .portfolio-item {
             width: 100%;
-            height: 100px;
-            border-radius: 8px;
-            border: 1px solid rgba(214, 175, 55, 0.2);
+            height: 105px;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
             object-fit: cover;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
             background: #111;
-        }
-        .portfolio-item:active {
-            transform: scale(1.05);
-            border-color: #d4af37;
         }
         .btn {
             display: flex;
@@ -117,56 +126,52 @@
             justify-content: center;
             width: 100%;
             padding: 16px;
-            margin-bottom: 18px;
+            margin-bottom: 16px;
             border-radius: 14px;
             text-decoration: none;
             font-weight: 600;
             font-size: 15px;
-            letter-spacing: 1px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
         }
+        /* Кнопка с переливом жидкого золота */
         .btn-main {
-            background: linear-gradient(90deg, #b38728, #fbf5b7, #da1b60, #b38728);
-            background-size: 300% 100%;
+            background: linear-gradient(90deg, #9a7422 0%, #f7efb3 25%, #f1d477 50%, #f7efb3 75%, #9a7422 100%);
+            background-size: 200% auto;
             color: #000000;
             font-weight: 700;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
-            animation: goldFlow 6s infinite linear;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
+            animation: goldGlow 4s infinite linear;
         }
-        @keyframes goldFlow {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
+        @keyframes goldGlow {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
         }
         .btn-main:active {
             transform: scale(0.98);
-            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.2);
         }
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             color: #ffffff;
-            border: 1px solid rgba(214, 175, 55, 0.25);
+            border: 1px solid rgba(212, 175, 55, 0.35);
         }
         .btn-secondary:active {
-            background: rgba(214, 175, 55, 0.1);
-            border-color: #d4af37;
+            background: rgba(212, 175, 55, 0.15);
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
         }
         .footer {
             margin-top: 30px;
-            font-size: 10px;
+            font-size: 9px;
             color: #555555;
             letter-spacing: 2px;
-            text-transform: uppercase;
         }
     </style>
 </head>
 <body>
 
 <div class="card-container">
-    <!-- Ваш ИИ-портрет как главная аватарка -->
-    <div class="avatar-container" style="background-image: url('https://vk.ru/photo-240872423_456239103');"></div>
+    <!-- Ваш шикарный ИИ-портрет в качестве аватарки -->
+    <div class="avatar-container" style="background-image: url('https://imgur.com');"></div>
     
     <h1>CyberShot</h1>
     <div class="subtitle">Visual AI Studio</div>
@@ -175,18 +180,18 @@
         Эксклюзивный ИИ-контент и премиальный визуал для личных брендов и бизнеса. Создаем журнальный стиль дистанционно.
     </p>
 
-    <!-- Секция вашего роскошного портфолио -->
     <div class="portfolio-title">Примеры наших работ</div>
     <div class="portfolio-grid">
-        <img src="https://vk.ru/photo-240872423_456239102" alt="Девушка с золотом" class="portfolio-item">
-        <img src="https://vk.ru/photo-240872423_456239101" alt="Льется золото" class="portfolio-item">
-        <img src="https://vk.ru/photo-240872423_456239100" alt="Золотая камера" class="portfolio-item">
+        <!-- Ваша личная премиум галерея из Imgur -->
+        <img src="https://imgur.com" alt="Кибер Богиня" class="portfolio-item">
+        <img src="https://imgur.com" alt="Жидкое Золото" class="portfolio-item">
+        <img src="https://imgur.com" alt="Золотая Камера" class="portfolio-item">
     </div>
 
-    <!-- Кнопки действий -->
-    <a href="https://vk.me" class="btn btn-main">💬 Написать / Консультация</a>
+    <!-- Полностью отлаженные кнопки связи -->
+    <a href="vk://vk.me/cybershot.studio" class="btn btn-main">💬 Написать / Консультация</a>
     <a href="https://vk.ru" class="btn btn-secondary" target="_blank">🌐 Группа ВКонтакте</a>
-    <a href="https://t.me" class="btn btn-secondary" target="_blank">📢 Telegram-канал</a>
+    <a href="tg://resolve?domain=cybershot_digital" class="btn btn-secondary">📢 Telegram-канал</a>
     <a href="tel:+79801781708" class="btn btn-secondary">📞 Позвонить: +7 (980) 178-17-08</a>
 
     <div class="footer">© CYBERSHOT STUDIO 2026</div>
