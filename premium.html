@@ -5,146 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>CyberShot Premium | Visual AI Studio</title>
-    <meta
-        name="description"
-        content="Эксклюзивный ИИ-контент и премиальный визуал для личных брендов и бизнеса."
-    >
-    <meta name="theme-color" content="#0a0a0a">
-
-    <!-- Подключение шрифта Montserrat -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700&display=swap"
-        rel="stylesheet"
-    >
 
     <style>
-        :root {
-            --background: #0a0a0a;
-            --card-background: rgba(20, 20, 20, 0.78);
-            --gold: #d4af37;
-            --white: #ffffff;
-            --text: #e0e0e0;
-            --muted: #777777;
-        }
-
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
         }
 
-        html {
-            color-scheme: dark;
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
         }
 
         body {
             min-height: 100vh;
-            min-height: 100svh;
             padding: 30px 20px;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
-            overflow-x: hidden;
-            position: relative;
-            isolation: isolate;
-
-            background: var(--background);
-            color: var(--white);
-            font-family: "Montserrat", Arial, sans-serif;
-        }
-
-        body::before,
-        body::after {
-            content: "";
-            position: fixed;
-            z-index: -1;
-            width: 800px;
-            height: 800px;
-            border-radius: 50%;
-            pointer-events: none;
-
+            color: #ffffff;
             background:
                 radial-gradient(
-                    circle,
-                    rgba(212, 175, 55, 0.06) 0%,
-                    transparent 70%
-                );
+                    circle at top left,
+                    rgba(212, 175, 55, 0.12),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(212, 175, 55, 0.08),
+                    transparent 35%
+                ),
+                #0a0a0a;
 
-            animation: smokeMove 12s infinite alternate ease-in-out;
+            font-family: Arial, sans-serif;
         }
 
-        body::before {
-            top: -200px;
-            left: -200px;
-        }
-
-        body::after {
-            right: -200px;
-            bottom: -200px;
-            animation-duration: 18s;
-            animation-direction: alternate-reverse;
-        }
-
-        @keyframes smokeMove {
-            from {
-                transform: translate(0, 0) scale(1);
-                filter: blur(50px);
-            }
-
-            to {
-                transform: translate(100px, 80px) scale(1.2);
-                filter: blur(80px);
-            }
-        }
-
-        .card-container {
+        .card {
             width: 100%;
             max-width: 400px;
             padding: 40px 24px;
 
-            position: relative;
-            z-index: 1;
-
             text-align: center;
-            background: var(--card-background);
-            border: 1px solid rgba(212, 175, 55, 0.4);
+
+            background: #141414;
+            border: 1px solid rgba(212, 175, 55, 0.5);
             border-radius: 24px;
 
-            box-shadow:
-                0 25px 50px rgba(0, 0, 0, 0.9),
-                inset 0 0 20px rgba(212, 175, 55, 0.03);
-
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
         }
 
         .avatar {
-            display: block;
             width: 115px;
             height: 115px;
             margin: 0 auto 25px;
 
-            object-fit: cover;
-            object-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-            background: #111111;
-            border: 2px solid var(--gold);
+            overflow: hidden;
+            color: #d4af37;
+            font-size: 36px;
+            font-weight: 700;
+
+            background: linear-gradient(135deg, #111111, #2a2415);
+            border: 2px solid #d4af37;
             border-radius: 50%;
+        }
 
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
         }
 
         h1 {
-            margin-bottom: 6px;
+            margin: 0 0 6px;
 
-            color: var(--white);
+            color: #ffffff;
             font-size: 28px;
-            font-weight: 700;
-            line-height: 1.2;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
@@ -152,104 +94,148 @@
         .subtitle {
             margin-bottom: 30px;
 
-            color: var(--gold);
+            color: #d4af37;
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 3px;
             text-transform: uppercase;
         }
 
         .description {
-            margin-bottom: 35px;
+            margin: 0 0 35px;
 
-            color: var(--text);
-            font-size: 13.5px;
-            font-weight: 300;
+            color: #e0e0e0;
+            font-size: 14px;
             line-height: 1.6;
         }
 
         .portfolio-title {
             margin-bottom: 15px;
 
-            color: var(--muted);
+            color: #888888;
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
-        .portfolio-grid {
+        .portfolio {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
             margin-bottom: 35px;
         }
 
         .portfolio-item {
-            display: block;
             width: 100%;
             aspect-ratio: 1 / 1;
 
-            object-fit: cover;
-            background: #111111;
-            border: 1px solid rgba(212, 175, 55, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+            color: #d4af37;
+            font-size: 12px;
+
+            background: linear-gradient(135deg, #111111, #2a2415);
+            border: 1px solid rgba(212, 175, 55, 0.35);
             border-radius: 10px;
-
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-            transition:
-                transform 0.3s ease,
-                border-color 0.3s ease;
         }
 
-        .portfolio-item:hover {
-            transform: translateY(-3px);
-            border-color: rgba(212, 175, 55, 0.7);
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
         }
 
-        .actions {
+        .buttons {
             display: grid;
             gap: 16px;
         }
 
         .btn {
+            width: 100%;
+            min-height: 54px;
+            padding: 15px;
+
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%;
-            min-height: 54px;
-            padding: 14px 16px;
 
-            color: var(--white);
+            color: #ffffff;
             font-size: 15px;
-            font-weight: 600;
-            line-height: 1.35;
-            letter-spacing: 0.5px;
+            font-weight: 700;
+            line-height: 1.3;
             text-align: center;
             text-decoration: none;
 
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.4);
             border-radius: 14px;
-            transition:
-                transform 0.3s ease,
-                background-color 0.3s ease,
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
         }
 
         .btn-main {
             color: #000000;
-            font-weight: 700;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #9a7422 0%,
-                    #f7efb3 25%,
-                    #f1d477 50%,
-                    #f7efb3 75%,
-                    #9a7422 100%
-                );
-
-            background-size: 200% auto;
-            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
-            animation: goldGlow 4s infinite linear;
+            background: linear-gradient(
+                90deg,
+                #9a7422,
+                #f7efb3,
+                #f1d477,
+                #9a7422
+            );
         }
+
+        .btn:hover {
+            border-color: #d4af37;
+            transform: translateY(-1px);
+        }
+
+        .footer {
+            margin-top: 30px;
+
+            color: #666666;
+            font-size: 9px;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 380px) {
+            body {
+                padding: 20px 14px;
+            }
+
+            .card {
+                padding: 32px 18px;
+            }
+
+            .btn {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="card">
+        <div class="avatar">
+            <!--
+            Когда загрузите изображение в папку images,
+            замените букву C следующим кодом:
+            <img src="./images/avatar.webp" alt="CyberShot">
+            -->
+            C
+        </div>
+
+        <h1>CyberShot</h1>
+        <div class="subtitle">Visual AI Studio</div>
+
+        <p class="description">
+            Эксклюзивный ИИ-контент и премиальный визуал для личных
+            брендов и бизнеса. Создаём журнальный стиль дистанционно.
+        </p>
+
+        <div class="portfolio-title">Примеры наших работ</div>
+
+        <div class="portfolio">
+            <div class="portfolio-item">Работа 1</div>
