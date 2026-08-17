@@ -6,87 +6,209 @@
 
     <title>CyberShot Premium | Visual AI Studio</title>
 
+    <meta
+        name="description"
+        content="Эксклюзивный ИИ-контент и премиальный визуал для личных брендов и бизнеса."
+    >
+    <meta name="theme-color" content="#0a0a0a">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
     <style>
-        * {
-            box-sizing: border-box;
+        :root {
+            --background: #0a0a0a;
+            --card: rgba(20, 20, 20, 0.82);
+            --gold: #d4af37;
+            --light-gold: #f7efb3;
+            --text: #e0e0e0;
+            --white: #ffffff;
+            --muted: #777777;
         }
 
-        html,
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+        }
+
+        html {
             min-height: 100%;
+            background: var(--background);
         }
 
         body {
             min-height: 100vh;
+            min-height: 100svh;
             padding: 30px 20px;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
 
-            color: #ffffff;
-            background:
-                radial-gradient(
-                    circle at top left,
-                    rgba(212, 175, 55, 0.12),
-                    transparent 35%
-                ),
-                radial-gradient(
-                    circle at bottom right,
-                    rgba(212, 175, 55, 0.08),
-                    transparent 35%
-                ),
-                #0a0a0a;
-
-            font-family: Arial, sans-serif;
+            color: var(--white);
+            background: var(--background);
+            font-family: "Montserrat", Arial, sans-serif;
         }
 
-        .card {
+        /* Золотой дым на фоне */
+
+        .smoke {
+            position: fixed;
+            z-index: 0;
+            width: 750px;
+            height: 750px;
+
+            border-radius: 50%;
+            pointer-events: none;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(212, 175, 55, 0.13) 0%,
+                    rgba(212, 175, 55, 0.05) 35%,
+                    transparent 70%
+                );
+
+            filter: blur(55px);
+        }
+
+        .smoke-one {
+            top: -300px;
+            left: -300px;
+            animation: smokeOne 14s infinite alternate ease-in-out;
+        }
+
+        .smoke-two {
+            right: -300px;
+            bottom: -300px;
+            animation: smokeTwo 18s infinite alternate ease-in-out;
+        }
+
+        .smoke-three {
+            top: 40%;
+            left: 50%;
+
+            width: 500px;
+            height: 500px;
+
+            opacity: 0.45;
+            transform: translate(-50%, -50%);
+            animation: smokeThree 16s infinite alternate ease-in-out;
+        }
+
+        @keyframes smokeOne {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(140px, 100px) scale(1.2);
+            }
+        }
+
+        @keyframes smokeTwo {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(-120px, -90px) scale(1.25);
+            }
+        }
+
+        @keyframes smokeThree {
+            from {
+                transform: translate(-55%, -45%) scale(0.9);
+            }
+
+            to {
+                transform: translate(-45%, -55%) scale(1.15);
+            }
+        }
+
+        .card-container {
             width: 100%;
             max-width: 400px;
+            margin: 0 auto;
             padding: 40px 24px;
+
+            position: relative;
+            z-index: 1;
 
             text-align: center;
 
-            background: #141414;
-            border: 1px solid rgba(212, 175, 55, 0.5);
+            background: var(--card);
+            border: 1px solid rgba(212, 175, 55, 0.45);
             border-radius: 24px;
 
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+            box-shadow:
+                0 25px 55px rgba(0, 0, 0, 0.9),
+                inset 0 0 25px rgba(212, 175, 55, 0.04),
+                0 0 35px rgba(212, 175, 55, 0.06);
+
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
         }
 
-        .avatar {
+        /* Фирменная эмблема */
+
+        .avatar-container {
             width: 115px;
             height: 115px;
             margin: 0 auto 25px;
 
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-
             overflow: hidden;
-            color: #d4af37;
-            font-size: 36px;
-            font-weight: 700;
 
-            background: linear-gradient(135deg, #111111, #2a2415);
-            border: 2px solid #d4af37;
+            color: var(--gold);
+            background:
+                linear-gradient(
+                    135deg,
+                    #111111,
+                    #2a2415
+                );
+
+            border: 2px solid var(--gold);
             border-radius: 50%;
+
+            box-shadow:
+                0 0 25px rgba(212, 175, 55, 0.3),
+                inset 0 0 20px rgba(212, 175, 55, 0.08);
         }
 
-        .avatar img {
+        .avatar-fallback {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .avatar-image {
+            position: absolute;
+            inset: 0;
+
+            display: block;
             width: 100%;
             height: 100%;
-            display: block;
+
             object-fit: cover;
+            object-position: center;
         }
 
         h1 {
             margin: 0 0 6px;
 
-            color: #ffffff;
+            color: var(--white);
             font-size: 28px;
+            font-weight: 700;
+            line-height: 1.2;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
@@ -94,60 +216,109 @@
         .subtitle {
             margin-bottom: 30px;
 
-            color: #d4af37;
+            color: var(--gold);
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 600;
+            line-height: 1.4;
             letter-spacing: 3px;
             text-transform: uppercase;
         }
 
         .description {
-            margin: 0 0 35px;
+            margin-bottom: 35px;
 
-            color: #e0e0e0;
-            font-size: 14px;
-            line-height: 1.6;
+            color: var(--text);
+            font-size: 13.5px;
+            font-weight: 300;
+            line-height: 1.65;
         }
 
         .portfolio-title {
             margin-bottom: 15px;
 
-            color: #888888;
+            color: var(--muted);
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
-        .portfolio {
+        .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
             margin-bottom: 35px;
         }
 
-        .portfolio-item {
+        .portfolio-link {
+            position: relative;
+            display: block;
             width: 100%;
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 1 / 1.15;
+            overflow: hidden;
+
+            color: var(--gold);
+            text-decoration: none;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111111,
+                    #2a2415
+                );
+
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .portfolio-link:hover {
+            transform: translateY(-4px);
+            border-color: rgba(212, 175, 55, 0.8);
+
+            box-shadow:
+                0 10px 22px rgba(0, 0, 0, 0.55),
+                0 0 15px rgba(212, 175, 55, 0.12);
+        }
+
+        .portfolio-fallback {
+            position: absolute;
+            inset: 0;
 
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 8px;
 
-            overflow: hidden;
-            color: #d4af37;
-            font-size: 12px;
-
-            background: linear-gradient(135deg, #111111, #2a2415);
-            border: 1px solid rgba(212, 175, 55, 0.35);
-            border-radius: 10px;
+            color: var(--gold);
+            font-size: 10px;
+            font-weight: 600;
+            line-height: 1.35;
+            text-align: center;
         }
 
-        .portfolio-item img {
+        .portfolio-item {
+            position: absolute;
+            inset: 0;
+
+            display: block;
             width: 100%;
             height: 100%;
-            display: block;
+
             object-fit: cover;
+            object-position: center;
+
+            transition: transform 0.4s ease;
+        }
+
+        .portfolio-link:hover .portfolio-item {
+            transform: scale(1.06);
         }
 
         .buttons {
@@ -156,40 +327,91 @@
         }
 
         .btn {
-            width: 100%;
-            min-height: 54px;
-            padding: 15px;
-
             display: flex;
             align-items: center;
             justify-content: center;
 
-            color: #ffffff;
-            font-size: 15px;
-            font-weight: 700;
-            line-height: 1.3;
+            width: 100%;
+            min-height: 54px;
+            padding: 14px 16px;
+
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.35;
+            letter-spacing: 0.3px;
             text-align: center;
             text-decoration: none;
 
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(212, 175, 55, 0.4);
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(212, 175, 55, 0.38);
             border-radius: 14px;
+
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+            transition:
+                transform 0.3s ease,
+                background-color 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
         }
 
         .btn-main {
             color: #000000;
-            background: linear-gradient(
-                90deg,
-                #9a7422,
-                #f7efb3,
-                #f1d477,
-                #9a7422
-            );
+            font-weight: 700;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #9a7422 0%,
+                    #f7efb3 25%,
+                    #f1d477 50%,
+                    #f7efb3 75%,
+                    #9a7422 100%
+                );
+
+            background-size: 200% auto;
+
+            border-color: rgba(247, 239, 179, 0.75);
+
+            box-shadow:
+                0 5px 22px rgba(212, 175, 55, 0.32),
+                inset 0 1px 1px rgba(255, 255, 255, 0.35);
+
+            animation: goldGlow 4s infinite linear;
+        }
+
+        @keyframes goldGlow {
+            from {
+                background-position: 0% center;
+            }
+
+            to {
+                background-position: 200% center;
+            }
         }
 
         .btn:hover {
-            border-color: #d4af37;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(212, 175, 55, 0.12);
+            border-color: rgba(212, 175, 55, 0.75);
+
+            box-shadow:
+                0 7px 20px rgba(0, 0, 0, 0.35),
+                0 0 16px rgba(212, 175, 55, 0.14);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn:focus-visible,
+        .portfolio-link:focus-visible {
+            outline: 2px solid var(--gold);
+            outline-offset: 4px;
         }
 
         .footer {
@@ -197,6 +419,7 @@
 
             color: #666666;
             font-size: 9px;
+            font-weight: 500;
             letter-spacing: 2px;
         }
 
@@ -205,37 +428,182 @@
                 padding: 20px 14px;
             }
 
-            .card {
+            .card-container {
                 padding: 32px 18px;
             }
 
+            .portfolio-grid {
+                gap: 8px;
+            }
+
             .btn {
-                font-size: 14px;
+                padding-right: 10px;
+                padding-left: 10px;
+                font-size: 13px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
 </head>
 
 <body>
-    <main class="card">
-        <div class="avatar">
-            <!--
-            Когда загрузите изображение в папку images,
-            замените букву C следующим кодом:
-            <img src="./images/avatar.webp" alt="CyberShot">
-            -->
-            C
+    <div class="smoke smoke-one"></div>
+    <div class="smoke smoke-two"></div>
+    <div class="smoke smoke-three"></div>
+
+    <main class="card-container">
+
+        <!-- ФИРМЕННАЯ ЭМБЛЕМА -->
+        <div class="avatar-container">
+            <span class="avatar-fallback">CS</span>
+
+            <img
+                src="./images/avatar.webp"
+                alt="Фирменная эмблема CyberShot"
+                class="avatar-image"
+                width="115"
+                height="115"
+                onerror="this.style.display='none'"
+            >
         </div>
 
         <h1>CyberShot</h1>
-        <div class="subtitle">Visual AI Studio</div>
+
+        <div class="subtitle">
+            Visual AI Studio
+        </div>
 
         <p class="description">
             Эксклюзивный ИИ-контент и премиальный визуал для личных
             брендов и бизнеса. Создаём журнальный стиль дистанционно.
         </p>
 
-        <div class="portfolio-title">Примеры наших работ</div>
+        <section aria-labelledby="portfolio-heading">
+            <h2 class="portfolio-title" id="portfolio-heading">
+                Примеры наших работ
+            </h2>
 
-        <div class="portfolio">
-            <div class="portfolio-item">Работа 1</div>
+            <div class="portfolio-grid">
+
+                <!-- ПЕРВАЯ РАБОТА -->
+                <a
+                    href="./images/work-1.webp"
+                    class="portfolio-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Открыть работу «Кибербогиня»"
+                >
+                    <span class="portfolio-fallback">
+                        Кибербогиня
+                    </span>
+
+                    <img
+                        src="./images/work-1.webp"
+                        alt="Работа «Кибербогиня»"
+                        class="portfolio-item"
+                        width="300"
+                        height="345"
+                        onerror="this.style.display='none'"
+                    >
+                </a>
+
+                <!-- ВТОРАЯ РАБОТА -->
+                <a
+                    href="./images/work-2.webp"
+                    class="portfolio-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Открыть работу «Жидкое золото»"
+                >
+                    <span class="portfolio-fallback">
+                        Жидкое золото
+                    </span>
+
+                    <img
+                        src="./images/work-2.webp"
+                        alt="Работа «Жидкое золото»"
+                        class="portfolio-item"
+                        width="300"
+                        height="345"
+                        onerror="this.style.display='none'"
+                    >
+                </a>
+
+                <!-- ТРЕТЬЯ РАБОТА -->
+                <a
+                    href="./images/work-3.webp"
+                    class="portfolio-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Открыть работу «Золотая камера»"
+                >
+                    <span class="portfolio-fallback">
+                        Золотая камера
+                    </span>
+
+                    <img
+                        src="./images/work-3.webp"
+                        alt="Работа «Золотая камера»"
+                        class="portfolio-item"
+                        width="300"
+                        height="345"
+                        onerror="this.style.display='none'"
+                    >
+                </a>
+
+            </div>
+        </section>
+
+        <nav class="buttons" aria-label="Контакты CyberShot">
+
+            <a
+                href="https://vk.me/cybershot.studio"
+                class="btn btn-main"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                💬&nbsp; Написать / Консультация
+            </a>
+
+            <a
+                href="https://vk.com/cybershot.studio"
+                class="btn btn-secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                🌐&nbsp; Сообщество ВКонтакте
+            </a>
+
+            <a
+                href="https://t.me/cybershot_digital"
+                class="btn btn-secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                📢&nbsp; Telegram-канал
+            </a>
+
+            <a
+                href="tel:+79801781708"
+                class="btn btn-secondary"
+            >
+                📞&nbsp; Позвонить: +7 (980) 178-17-08
+            </a>
+
+        </nav>
+
+        <footer class="footer">
+            © CYBERSHOT STUDIO 2026
+        </footer>
+    </main>
+</body>
+</html>
