@@ -10,7 +10,7 @@
         name="description"
         content="Эксклюзивный ИИ-контент и премиальный визуал для личных брендов и бизнеса."
     >
-    <meta name="theme-color" content="#0a0a0a">
+    <meta name="theme-color" content="#080808">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,13 +22,13 @@
 
     <style>
         :root {
-            --background: #0a0a0a;
-            --card: rgba(20, 20, 20, 0.82);
+            --background: #080808;
+            --card: rgba(18, 18, 18, 0.86);
             --gold: #d4af37;
             --light-gold: #f7efb3;
-            --text: #e0e0e0;
             --white: #ffffff;
-            --muted: #777777;
+            --text: #e0e0e0;
+            --muted: #858585;
         }
 
         * {
@@ -45,95 +45,110 @@
         body {
             min-height: 100vh;
             min-height: 100svh;
-            padding: 30px 20px;
+            padding: 30px 18px;
 
             position: relative;
             overflow-x: hidden;
+            isolation: isolate;
 
             color: var(--white);
             background: var(--background);
             font-family: "Montserrat", Arial, sans-serif;
         }
 
-        /* Золотой дым на фоне */
+        /* Золотой дым */
 
-        .smoke {
+        body::before,
+        body::after {
+            content: "";
             position: fixed;
-            z-index: 0;
+            z-index: -1;
+
             width: 750px;
             height: 750px;
-
             border-radius: 50%;
             pointer-events: none;
 
             background:
                 radial-gradient(
                     circle,
-                    rgba(212, 175, 55, 0.13) 0%,
-                    rgba(212, 175, 55, 0.05) 35%,
+                    rgba(212, 175, 55, 0.16) 0%,
+                    rgba(212, 175, 55, 0.07) 30%,
                     transparent 70%
                 );
 
             filter: blur(55px);
         }
 
-        .smoke-one {
+        body::before {
             top: -300px;
             left: -300px;
-            animation: smokeOne 14s infinite alternate ease-in-out;
+            animation: smoke-left 14s infinite alternate ease-in-out;
         }
 
-        .smoke-two {
+        body::after {
             right: -300px;
             bottom: -300px;
-            animation: smokeTwo 18s infinite alternate ease-in-out;
+            animation: smoke-right 18s infinite alternate ease-in-out;
         }
 
-        .smoke-three {
-            top: 40%;
+        @keyframes smoke-left {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(140px, 110px) scale(1.25);
+            }
+        }
+
+        @keyframes smoke-right {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(-120px, -100px) scale(1.2);
+            }
+        }
+
+        .middle-smoke {
+            position: fixed;
+            top: 35%;
             left: 50%;
+            z-index: -1;
 
             width: 500px;
             height: 500px;
+            border-radius: 50%;
+            pointer-events: none;
 
-            opacity: 0.45;
-            transform: translate(-50%, -50%);
-            animation: smokeThree 16s infinite alternate ease-in-out;
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(212, 175, 55, 0.08),
+                    transparent 68%
+                );
+
+            filter: blur(65px);
+            animation: middle-smoke 16s infinite alternate ease-in-out;
         }
 
-        @keyframes smokeOne {
+        @keyframes middle-smoke {
             from {
-                transform: translate(0, 0) scale(1);
+                transform: translate(-58%, -42%) scale(0.9);
             }
 
             to {
-                transform: translate(140px, 100px) scale(1.2);
+                transform: translate(-42%, -58%) scale(1.2);
             }
         }
 
-        @keyframes smokeTwo {
-            from {
-                transform: translate(0, 0) scale(1);
-            }
-
-            to {
-                transform: translate(-120px, -90px) scale(1.25);
-            }
-        }
-
-        @keyframes smokeThree {
-            from {
-                transform: translate(-55%, -45%) scale(0.9);
-            }
-
-            to {
-                transform: translate(-45%, -55%) scale(1.15);
-            }
-        }
+        /* Основная карточка */
 
         .card-container {
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             margin: 0 auto;
             padding: 40px 24px;
 
@@ -144,69 +159,66 @@
 
             background: var(--card);
             border: 1px solid rgba(212, 175, 55, 0.45);
-            border-radius: 24px;
+            border-radius: 26px;
 
             box-shadow:
                 0 25px 55px rgba(0, 0, 0, 0.9),
                 inset 0 0 25px rgba(212, 175, 55, 0.04),
-                0 0 35px rgba(212, 175, 55, 0.06);
+                0 0 35px rgba(212, 175, 55, 0.07);
 
             backdrop-filter: blur(22px);
             -webkit-backdrop-filter: blur(22px);
         }
 
-        /* Фирменная эмблема */
+        /* Правильный круглый логотип */
 
-        .avatar-container {
-            width: 115px;
-            height: 115px;
+        .logo-container {
+            width: 125px;
+            height: 125px;
             margin: 0 auto 25px;
 
-            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
 
             color: var(--gold);
             background:
-                linear-gradient(
-                    135deg,
-                    #111111,
-                    #2a2415
+                radial-gradient(
+                    circle,
+                    #16130c 0%,
+                    #050505 72%
                 );
 
-            border: 2px solid var(--gold);
+            border: 3px solid var(--gold);
             border-radius: 50%;
 
             box-shadow:
-                0 0 25px rgba(212, 175, 55, 0.3),
-                inset 0 0 20px rgba(212, 175, 55, 0.08);
+                0 0 18px rgba(212, 175, 55, 0.4),
+                0 0 35px rgba(212, 175, 55, 0.16),
+                inset 0 0 18px rgba(212, 175, 55, 0.09);
         }
 
-        .avatar-fallback {
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .avatar-image {
-            position: absolute;
-            inset: 0;
-
+        .logo-symbol {
             display: block;
-            width: 100%;
-            height: 100%;
 
-            object-fit: cover;
-            object-position: center;
+            color: var(--gold);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 73px;
+            font-weight: 700;
+            line-height: 1;
+
+            transform: translateY(-2px);
+
+            text-shadow:
+                0 0 10px rgba(212, 175, 55, 0.35),
+                0 0 22px rgba(212, 175, 55, 0.18);
         }
 
         h1 {
-            margin: 0 0 6px;
+            margin-bottom: 6px;
 
             color: var(--white);
-            font-size: 28px;
+            font-size: 29px;
             font-weight: 700;
             line-height: 1.2;
             letter-spacing: 2px;
@@ -214,7 +226,7 @@
         }
 
         .subtitle {
-            margin-bottom: 30px;
+            margin-bottom: 28px;
 
             color: var(--gold);
             font-size: 11px;
@@ -225,13 +237,15 @@
         }
 
         .description {
-            margin-bottom: 35px;
+            margin-bottom: 34px;
 
             color: var(--text);
             font-size: 13.5px;
             font-weight: 300;
             line-height: 1.65;
         }
+
+        /* Портфолио */
 
         .portfolio-title {
             margin-bottom: 15px;
@@ -245,7 +259,7 @@
 
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 12px;
             margin-bottom: 35px;
         }
@@ -257,20 +271,11 @@
             aspect-ratio: 1 / 1.15;
             overflow: hidden;
 
-            color: var(--gold);
-            text-decoration: none;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #111111,
-                    #2a2415
-                );
-
+            background: #111111;
             border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 10px;
+            border-radius: 12px;
 
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+            box-shadow: 0 7px 18px rgba(0, 0, 0, 0.45);
 
             transition:
                 transform 0.3s ease,
@@ -283,30 +288,11 @@
             border-color: rgba(212, 175, 55, 0.8);
 
             box-shadow:
-                0 10px 22px rgba(0, 0, 0, 0.55),
-                0 0 15px rgba(212, 175, 55, 0.12);
-        }
-
-        .portfolio-fallback {
-            position: absolute;
-            inset: 0;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px;
-
-            color: var(--gold);
-            font-size: 10px;
-            font-weight: 600;
-            line-height: 1.35;
-            text-align: center;
+                0 12px 24px rgba(0, 0, 0, 0.55),
+                0 0 18px rgba(212, 175, 55, 0.14);
         }
 
         .portfolio-item {
-            position: absolute;
-            inset: 0;
-
             display: block;
             width: 100%;
             height: 100%;
@@ -321,9 +307,11 @@
             transform: scale(1.06);
         }
 
+        /* Контактные кнопки */
+
         .buttons {
             display: grid;
-            gap: 16px;
+            gap: 15px;
         }
 
         .btn {
@@ -332,22 +320,22 @@
             justify-content: center;
 
             width: 100%;
-            min-height: 54px;
-            padding: 14px 16px;
+            min-height: 55px;
+            padding: 14px 15px;
 
             color: var(--white);
             font-size: 14px;
             font-weight: 600;
             line-height: 1.35;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.25px;
             text-align: center;
             text-decoration: none;
 
             background: rgba(255, 255, 255, 0.025);
-            border: 1px solid rgba(212, 175, 55, 0.38);
+            border: 1px solid rgba(212, 175, 55, 0.4);
             border-radius: 14px;
 
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
 
             transition:
                 transform 0.3s ease,
@@ -357,31 +345,30 @@
         }
 
         .btn-main {
-            color: #000000;
+            color: #080808;
             font-weight: 700;
 
             background:
                 linear-gradient(
                     90deg,
-                    #9a7422 0%,
+                    #967020 0%,
                     #f7efb3 25%,
                     #f1d477 50%,
                     #f7efb3 75%,
-                    #9a7422 100%
+                    #967020 100%
                 );
 
             background-size: 200% auto;
-
-            border-color: rgba(247, 239, 179, 0.75);
+            border-color: rgba(247, 239, 179, 0.8);
 
             box-shadow:
-                0 5px 22px rgba(212, 175, 55, 0.32),
-                inset 0 1px 1px rgba(255, 255, 255, 0.35);
+                0 5px 22px rgba(212, 175, 55, 0.34),
+                inset 0 1px 1px rgba(255, 255, 255, 0.4);
 
-            animation: goldGlow 4s infinite linear;
+            animation: gold-button 4s infinite linear;
         }
 
-        @keyframes goldGlow {
+        @keyframes gold-button {
             from {
                 background-position: 0% center;
             }
@@ -397,11 +384,15 @@
 
         .btn-secondary:hover {
             background: rgba(212, 175, 55, 0.12);
-            border-color: rgba(212, 175, 55, 0.75);
+            border-color: rgba(212, 175, 55, 0.8);
 
             box-shadow:
-                0 7px 20px rgba(0, 0, 0, 0.35),
+                0 8px 20px rgba(0, 0, 0, 0.35),
                 0 0 16px rgba(212, 175, 55, 0.14);
+        }
+
+        .btn-main:hover {
+            box-shadow: 0 8px 27px rgba(212, 175, 55, 0.42);
         }
 
         .btn:active {
@@ -417,7 +408,7 @@
         .footer {
             margin-top: 30px;
 
-            color: #666666;
+            color: #686868;
             font-size: 9px;
             font-weight: 500;
             letter-spacing: 2px;
@@ -425,15 +416,15 @@
 
         @media (max-width: 380px) {
             body {
-                padding: 20px 14px;
+                padding: 20px 13px;
             }
 
             .card-container {
-                padding: 32px 18px;
+                padding: 32px 17px;
             }
 
             .portfolio-grid {
-                gap: 8px;
+                gap: 9px;
             }
 
             .btn {
@@ -456,24 +447,17 @@
 </head>
 
 <body>
-    <div class="smoke smoke-one"></div>
-    <div class="smoke smoke-two"></div>
-    <div class="smoke smoke-three"></div>
+    <div class="middle-smoke"></div>
 
     <main class="card-container">
 
-        <!-- ФИРМЕННАЯ ЭМБЛЕМА -->
-        <div class="avatar-container">
-            <span class="avatar-fallback">CS</span>
-
-            <img
-                src="./images/avatar.webp"
-                alt="Фирменная эмблема CyberShot"
-                class="avatar-image"
-                width="115"
-                height="115"
-                onerror="this.style.display='none'"
-            >
+        <!-- Фирменный логотип -->
+        <div
+            class="logo-container"
+            role="img"
+            aria-label="Логотип CyberShot"
+        >
+            <span class="logo-symbol">$</span>
         </div>
 
         <h1>CyberShot</h1>
@@ -494,69 +478,63 @@
 
             <div class="portfolio-grid">
 
-                <!-- ПЕРВАЯ РАБОТА -->
                 <a
-                    href="./images/work-1.webp"
+                    href="https://imgur.com/fYjR5wS"
                     class="portfolio-link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Открыть работу «Кибербогиня»"
+                    aria-label="Открыть работу «Девушка в золоте»"
                 >
-                    <span class="portfolio-fallback">
-                        Кибербогиня
-                    </span>
-
                     <img
-                        src="./images/work-1.webp"
-                        alt="Работа «Кибербогиня»"
+                        src="https://i.imgur.com/fYjR5wS.jpg"
+                        alt="Девушка в золоте"
                         class="portfolio-item"
-                        width="300"
-                        height="345"
-                        onerror="this.style.display='none'"
+                        loading="lazy"
                     >
                 </a>
 
-                <!-- ВТОРАЯ РАБОТА -->
                 <a
-                    href="./images/work-2.webp"
+                    href="https://imgur.com/3dfB9ze"
                     class="portfolio-link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Открыть работу «Жидкое золото»"
+                    aria-label="Открыть работу «Золотая волна»"
                 >
-                    <span class="portfolio-fallback">
-                        Жидкое золото
-                    </span>
-
                     <img
-                        src="./images/work-2.webp"
-                        alt="Работа «Жидкое золото»"
+                        src="https://i.imgur.com/3dfB9ze.jpg"
+                        alt="Золотая волна с чёрными камнями"
                         class="portfolio-item"
-                        width="300"
-                        height="345"
-                        onerror="this.style.display='none'"
+                        loading="lazy"
                     >
                 </a>
 
-                <!-- ТРЕТЬЯ РАБОТА -->
                 <a
-                    href="./images/work-3.webp"
+                    href="https://imgur.com/2ZCx3eN"
                     class="portfolio-link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Открыть работу «Золотая камера»"
+                    aria-label="Открыть работу с фотоаппаратом"
                 >
-                    <span class="portfolio-fallback">
-                        Золотая камера
-                    </span>
-
                     <img
-                        src="./images/work-3.webp"
-                        alt="Работа «Золотая камера»"
+                        src="https://i.imgur.com/2ZCx3eN.jpg"
+                        alt="Золотой фотоаппарат в руках"
                         class="portfolio-item"
-                        width="300"
-                        height="345"
-                        onerror="this.style.display='none'"
+                        loading="lazy"
+                    >
+                </a>
+
+                <a
+                    href="https://imgur.com/pPtS4bH"
+                    class="portfolio-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Открыть работу с визиткой"
+                >
+                    <img
+                        src="https://i.imgur.com/pPtS4bH.jpg"
+                        alt="Фирменная визитка CyberShot в руке"
+                        class="portfolio-item"
+                        loading="lazy"
                     >
                 </a>
 
@@ -575,7 +553,7 @@
             </a>
 
             <a
-                href="https://vk.com/cybershot.studio"
+                href="https://vk.ru/cybershot.studio"
                 class="btn btn-secondary"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -604,6 +582,7 @@
         <footer class="footer">
             © CYBERSHOT STUDIO 2026
         </footer>
+
     </main>
 </body>
 </html>
