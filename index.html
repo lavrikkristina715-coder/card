@@ -5,46 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Юлия Стрельченко — Интерактивная визитка</title>
     
-    <!-- Подключаем изысканные шрифты -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;500;700&display=swap" rel="stylesheet">
 
     <style>
-        /* Базовые настройки страницы */
         body {
             margin: 0;
             padding: 20px 10px;
             font-family: 'Manrope', sans-serif;
-            background-color: #070707;
-            /* Эстетичный мистический фон с золотой пылью */
-            background-image: linear-gradient(rgba(7, 7, 7, 0.85), rgba(7, 7, 7, 0.95)), url('https://unsplash.com');
+            background-color: #E6DFD5;
+            /* Ваша картинка №3 (Матрица чисел) встает на фон сайта */
+            background-image: linear-gradient(rgba(230, 223, 213, 0.82), rgba(230, 223, 213, 0.88)), url('chad_70cbbf2a1d4c44a192772759d2e50239.png');
             background-position: center;
             background-size: cover;
             background-attachment: fixed;
-            color: #F3EFE7;
+            color: #4A4238;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
         }
 
-        /* Главный контейнер визитки */
         .card-container {
             max-width: 420px;
             width: 100%;
-            background: rgba(21, 21, 21, 0.75);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(201, 149, 92, 0.3);
+            background: rgba(248, 246, 242, 0.93);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(201, 164, 92, 0.4);
             border-radius: 24px;
-            padding: 40px 25px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            padding: 35px 25px;
+            box-shadow: 0 15px 35px rgba(74, 66, 56, 0.15);
             text-align: center;
             box-sizing: border-box;
-            position: relative;
         }
 
-        /* Золотое сияние для Аватара */
+        /* Золотое пульсирующее свечение вокруг аватара */
         .profile-avatar {
             width: 120px;
             height: 120px;
@@ -58,52 +54,50 @@
 
         @keyframes pulseGlow {
             0% { box-shadow: 0 0 8px rgba(201, 149, 92, 0.3); transform: scale(1); }
-            100% { box-shadow: 0 0 30px rgba(201, 164, 92, 0.8); transform: scale(1.03); }
+            100% { box-shadow: 0 0 25px rgba(201, 149, 92, 0.8); transform: scale(1.02); }
         }
 
-        /* Мерцающий звездный заголовок */
         .profile-name {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 34px;
+            font-size: 32px;
             font-weight: 600;
-            color: #F3EFE7;
+            color: #2C251E;
             margin: 0 0 5px 0;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(243, 239, 231, 0.5);
-            animation: textFlicker 4s infinite alternate;
-        }
-
-        @keyframes textFlicker {
-            0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(243, 239, 231, 0.5); }
-            50% { opacity: 0.95; text-shadow: 0 0 18px rgba(201, 149, 92, 0.8); }
+            letter-spacing: 0.5px;
         }
 
         .profile-subtitle {
-            font-size: 13px;
+            font-size: 14px;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             color: #C9A45C;
             font-weight: 700;
             margin-bottom: 25px;
         }
 
-        /* Текст-описание */
         .profile-bio {
             font-size: 14px;
             line-height: 1.6;
-            color: #B8BEC7;
+            color: #5D5449;
             margin-bottom: 30px;
             text-align: center;
         }
 
-        /* Сетка интерактивных кнопок */
+        .decor-image {
+            width: 100%;
+            border-radius: 12px;
+            margin: 25px 0;
+            border: 1px solid rgba(201, 164, 92, 0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
         .buttons-grid {
             display: flex;
             flex-direction: column;
             gap: 16px;
         }
 
-        /* Кнопки с эффектом «живого» космического перелива */
+        /* Интерактивные кнопки с переливом */
         .magic-btn {
             display: flex;
             align-items: center;
@@ -112,32 +106,32 @@
             font-size: 15px;
             font-weight: 500;
             text-decoration: none;
-            color: #F3EFE7;
-            background: linear-gradient(135deg, #151515 0%, #222222 50%, #151515 100%);
-            border: 1px solid rgba(201, 149, 92, 0.4);
+            color: #3D352C;
+            background: linear-gradient(135deg, #EADFC9 0%, #FDFBF7 50%, #D4C19F 100%);
+            background-size: 200% auto;
+            border: 1px solid rgba(201, 149, 92, 0.5);
             border-radius: 14px;
             transition: all 0.4s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 10px rgba(201, 164, 92, 0.1);
             cursor: pointer;
         }
 
-        /* Эффект при наведении/нажатии: кнопка загорается изнутри */
         .magic-btn:hover {
+            background-position: right center;
             transform: translateY(-3px);
-            box-shadow: 0 0 25px rgba(201, 149, 92, 0.6);
-            color: #FFFFFF;
+            box-shadow: 0 8px 25px rgba(201, 149, 92, 0.6);
+            color: #1A1510;
             border-color: #C9A45C;
-            background: linear-gradient(135deg, #1A1A1A 0%, #2C251E 100%);
         }
 
-        /* Главная кнопка-магнит с постоянным мерцанием (Шиммер-эффект) */
+        /* Главная кнопка-магнит с постоянным мистическим мерцанием */
         .btn-primary {
-            background: linear-gradient(135deg, #A6823C 0%, #C9A45C 50%, #A6823C 100%);
+            background: linear-gradient(135deg, #C9A45C 0%, #EADFC9 50%, #A6823C 100%);
             background-size: 200% auto;
             color: #070707 !important;
             font-weight: 700;
             border: none;
-            animation: infiniteShimmer 3s infinite linear;
+            animation: infiniteShimmer 4s infinite linear;
         }
 
         @keyframes infiniteShimmer {
@@ -147,15 +141,14 @@
         }
 
         .btn-primary:hover {
-            box-shadow: 0 0 35px rgba(201, 149, 92, 0.9);
-            transform: scale(1.02) translateY(-3px);
+            box-shadow: 0 10px 30px rgba(201, 149, 92, 0.8);
         }
     </style>
 </head>
 <body>
 
     <div class="card-container">
-        <!-- Аватар Юлии (Прямая вырезка лица из вашего скриншота) -->
+        <!-- Лицо Юлии (Аватар) -->
         <img src="https://ibb.co" alt="Юлия Стрельченко" class="profile-avatar">
         
         <h1 class="profile-name">Юлия Стрельченко</h1>
@@ -165,14 +158,19 @@
             В каждом числе заложена матрица вашей судьбы. Дата рождения — это не случайность, а персональный навигатор, в котором зашифрованы ваши сильные стороны и истинное предназначение. Помогаю расшифровать этот код для вашего масштаба.
         </div>
 
+        <!-- Ваша картинка №4 (Карта с числом 8 в руках) внутри сайта -->
+        <img src="chad_3a5edeeac57e4bfc80b52f09c22df645.png" alt="Магия Чисел" class="decor-image">
+
         <div class="buttons-grid">
-            <!-- Кнопки с исправленными точными ссылками -->
             <a href="https://wa.me" target="_blank" class="magic-btn btn-primary">🔮 УЗНАТЬ СВОЙ КОД СУДЬБЫ</a>
             <a href="https://wa.me" target="_blank" class="magic-btn">💬 Консультация в WhatsApp</a>
             <a href="https://t.me" target="_blank" class="magic-btn">✈️ Мой Telegram-канал</a>
             <a href="https://instagram.com" target="_blank" class="magic-btn">📷 Наш Instagram</a>
             <a href="https://vk.com" target="_blank" class="magic-btn">👥 Профиль ВКонтакте</a>
         </div>
+
+        <!-- Ваша картинка №5 (Блокнот и чашка матча) внизу сайта -->
+        <img src="chad_5fe2e50f3abf4ef2b629c3047bb8d58d.png" alt="Цифровая Матрица" class="decor-image">
     </div>
 
 </body>
