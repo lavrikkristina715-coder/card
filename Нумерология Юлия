@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Юлия Стрельченко — Интерактивная визитка</title>
+    
+    <!-- Подключаем изысканные шрифты из Google Fonts -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* Базовые премиальные настройки страницы */
+        body {
+            margin: 0;
+            padding: 20px 10px;
+            font-family: 'Manrope', sans-serif;
+            background-color: #E6DFD5;
+            /* Вставляем картинку с матрицей чисел на фон всего сайта */
+            background-image: linear-gradient(rgba(230, 223, 213, 0.85), rgba(230, 223, 213, 0.85)), url('https://imgur.com');
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+            color: #4A4238;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Главный контейнер визитки */
+        .card-container {
+            max-width: 420px;
+            width: 100%;
+            background: rgba(248, 246, 242, 0.92);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(201, 164, 92, 0.3);
+            border-radius: 24px;
+            padding: 35px 25px;
+            box-shadow: 0 15px 35px rgba(74, 66, 56, 0.15);
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        /* Магический пульсирующий аватар */
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #C9A45C;
+            box-shadow: 0 0 15px rgba(201, 164, 92, 0.4);
+            animation: pulseGlow 3s infinite alternate ease-in-out;
+            margin-bottom: 20px;
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 8px rgba(201, 164, 92, 0.3); transform: scale(1); }
+            100% { box-shadow: 0 0 25px rgba(201, 164, 92, 0.7); transform: scale(1.02); }
+        }
+
+        /* Заголовки */
+        .profile-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 600;
+            color: #2C251E;
+            margin: 0 0 5px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-subtitle {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #C9A45C;
+            font-weight: 500;
+            margin-bottom: 25px;
+        }
+
+        /* Мистический интро-текст */
+        .profile-bio {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #5D5449;
+            margin-bottom: 30px;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        /* Эстетичные изображения-разделители */
+        .decor-image {
+            width: 100%;
+            border-radius: 12px;
+            margin: 25px 0;
+            border: 1px solid rgba(201, 164, 92, 0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Сетка интерактивных кнопок */
+        .buttons-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Кнопка с эффектом переливающегося живого свечения */
+        .magic-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 20px;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            color: #3D352C;
+            background: linear-gradient(135deg, #EADFC9 0%, #FDFBF7 50%, #D4C19F 100%);
+            background-size: 200% auto;
+            border: 1px solid rgba(201, 164, 92, 0.5);
+            border-radius: 14px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 10px rgba(201, 164, 92, 0.1);
+            cursor: pointer;
+        }
+
+        /* Анимация при наведении мышки или тапе на телефоне */
+        .magic-btn:hover {
+            background-position: right center;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(201, 164, 92, 0.5);
+            color: #1A1510;
+            border-color: #C9A45C;
+        }
+
+        /* Главная акцентная светящаяся кнопка */
+        .btn-primary {
+            background: linear-gradient(135deg, #C9A45C 0%, #EADFC9 50%, #A6823C 100%);
+            background-size: 200% auto;
+            color: #FFF !important;
+            font-weight: 600;
+            border: none;
+            animation: infiniteShimmer 4s infinite linear;
+        }
+
+        @keyframes infiniteShimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 10px 30px rgba(201, 164, 92, 0.7);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <!-- Аватар Юлии (подгружается по вашей ссылке) -->
+        <img src="https://imgur.com" alt="Юлия Стрельченко" class="magic-avatar profile-avatar">
+        
+        <h1 class="profile-name">Юлия Стрельченко</h1>
+        <div class="profile-subtitle">Нумеролог · Нейроцифролог</div>
+        
+        <div class="profile-bio">
+            В каждом числе заложена матрица вашей судьбы. Дата рождения — это не случайность, а персональный навигатор, в котором зашифрованы ваш финансовый потенциал, предназначение и скрытые блоки. Я помогаю расшифровать этот код и настроить вашу личную цифровую систему на успех и масштаб.
+        </div>
+
+        <!-- Изображение 4: Карта с числом 8 в руках -->
+        <img src="https://imgur.com" alt="Магия Чисел" class="decor-image">
+
+        <div class="buttons-grid">
+            <!-- Кнопки со всеми ссылками клиента -->
+            <a href="https://wa.me" target="_blank" class="magic-btn btn-primary">🔮 УЗНАТЬ СВОЙ КОД СУДЬБЫ</a>
+            <a href="https://wa.me" target="_blank" class="magic-btn">💬 Консультация в WhatsApp</a>
+            <a href="https://t.me" target="_blank" class="magic-btn">✈️ Мой Telegram-канал</a>
+            <a href="https://instagram.com" target="_blank" class="magic-btn">📷 Наш Instagram</a>
+            <a href="https://vk.com" target="_blank" class="magic-btn">👥 Сообщество ВКонтакте</a>
+        </div>
+
+        <!-- Изображение 5: Книга расчетов и матча на столе -->
+        <img src="https://imgur.com" alt="Цифровая Матрица" class="decor-image">
+    </div>
+
+</body>
+</html>
