@@ -14,29 +14,63 @@
             margin: 0;
             padding: 20px 10px;
             font-family: 'Manrope', sans-serif;
-            background-color: #E6DFD5;
-            background-image: linear-gradient(rgba(230, 223, 213, 0.82), rgba(230, 223, 213, 0.88)), url('chad_70cbbf2a1d4c44a192772759d2e50239.png');
-            background-position: center;
-            background-size: cover;
-            background-attachment: fixed;
+            background-color: #0d0d0d;
             color: #4A4238;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .smoke-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, rgba(201, 149, 92, 0.15) 0%, #0d0d0d 80%);
+            z-index: 1;
+            opacity: 0.7;
+            filter: blur(40px);
+            animation: smokeMove 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes smokeMove {
+            0% { transform: scale(1) translate(0, 0) rotate(0deg); }
+            50% { transform: scale(1.2) translate(3%, 3%) rotate(3deg); }
+            100% { transform: scale(1) translate(-3%, -3%) rotate(-3deg); }
+        }
+
+        .magic-number {
+            position: fixed;
+            font-family: 'Cormorant Garamond', serif;
+            color: rgba(201, 149, 92, 0.22);
+            font-weight: bold;
+            z-index: 2;
+            pointer-events: none;
+            text-shadow: 0 0 15px rgba(201, 149, 92, 0.4);
+            animation: floatNumber 14s infinite linear;
+        }
+
+        @keyframes floatNumber {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
         .card-container {
             max-width: 420px;
             width: 100%;
-            background: rgba(248, 246, 242, 0.93);
-            backdrop-filter: blur(10px);
+            background: rgba(248, 246, 242, 0.95);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(201, 149, 92, 0.4);
             border-radius: 24px;
             padding: 35px 25px;
-            box-shadow: 0 15px 35px rgba(74, 66, 56, 0.15);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
             text-align: center;
             box-sizing: border-box;
+            position: relative;
+            z-index: 3;
         }
 
         .profile-avatar {
@@ -144,8 +178,14 @@
 </head>
 <body>
 
+    <div class="smoke-bg"></div>
+    <div class="magic-number" style="left: 8%; font-size: 75px; animation-delay: 0s; animation-duration: 15s;">7</div>
+    <div class="magic-number" style="left: 22%; font-size: 45px; animation-delay: 3s; animation-duration: 11s;">3</div>
+    <div class="magic-number" style="left: 85%; font-size: 80px; animation-delay: 1s; animation-duration: 17s;">11</div>
+    <div class="magic-number" style="left: 72%; font-size: 55px; animation-delay: 5s; animation-duration: 12s;">8</div>
+    <div class="magic-number" style="left: 48%; font-size: 60px; animation-delay: 7s; animation-duration: 14s;">5</div>
+
     <div class="card-container">
-        <!-- Аватар Юлии -->
         <img src="HLOZhEcgOrg.jpg" alt="Юлия Стрельченко" class="profile-avatar">
         
         <h1 class="profile-name">Юлия Стрельченко</h1>
@@ -155,7 +195,7 @@
             В каждом числе заложена матрица вашей судьбы. Дата рождения — это не случайность, а персональный навигатор, в котором зашифрованы ваши сильные стороны и истинное предназначение. Помогаю расшифровать этот код для вашего масштаба.
         </div>
 
-        <img src="chad_3a5edeeac57e4bfc80b52f09c22df645.png" alt="Магия Чисел" class="decor-image">
+        <img src="image1.png" alt="Магия Чисел" class="decor-image">
 
         <div class="buttons-grid">
             <a href="https://wa.me" target="_blank" class="magic-btn btn-primary">🔮 УЗНАТЬ СВОЙ КОД СУДЬБЫ</a>
@@ -165,7 +205,7 @@
             <a href="https://vk.com" target="_blank" class="magic-btn">👥 Профиль ВКонтакте</a>
         </div>
 
-        <img src="chad_5fe2e50f3abf4ef2b629c3047bb8d58d.png" alt="Цифровая Матрица" class="decor-image">
+        <img src="image2.png" alt="Цифровая Матрица" class="decor-image">
     </div>
 
 </body>
