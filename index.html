@@ -8,15 +8,15 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Segoe UI', sans-serif;
-    color: #dfe8ff;
+    font-family: 'Georgia', 'Segoe UI', serif;
+    color: #e9dcc0;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow-x: hidden;
     position: relative;
-    background: #04040a;
+    background: #05060f;
   }
 
   .bg-photo {
@@ -24,39 +24,62 @@
     background-image: url('stars-bg.jpg');
     background-size: cover;
     background-position: center;
-    filter: saturate(1.1) brightness(0.75);
+    filter: saturate(1.05) brightness(0.7);
     z-index: 0;
   }
 
   .bg-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at 30% 20%, rgba(10,15,40,0.55) 0%, rgba(3,3,10,0.85) 75%);
+    background: radial-gradient(circle at 25% 15%, rgba(30,25,15,0.35) 0%, rgba(4,5,15,0.85) 75%);
     z-index: 1;
   }
 
-  .smoke {
+  .bg-texture {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background:
-      radial-gradient(circle at 50% 30%, rgba(80,120,200,0.25) 0%, transparent 60%),
-      radial-gradient(circle at 20% 80%, rgba(40,60,120,0.3) 0%, transparent 55%),
-      radial-gradient(circle at 80% 70%, rgba(60,90,160,0.25) 0%, transparent 55%);
-    filter: blur(45px);
-    animation: smokeMove 18s ease-in-out infinite alternate;
-    z-index: 2;
+      radial-gradient(circle at 15% 20%, rgba(212,175,122,0.08) 0%, transparent 40%),
+      radial-gradient(circle at 85% 30%, rgba(212,175,122,0.06) 0%, transparent 35%),
+      radial-gradient(circle at 20% 85%, rgba(212,175,122,0.07) 0%, transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(212,175,122,0.06) 0%, transparent 35%);
+    z-index: 1;
   }
 
-  @keyframes smokeMove {
-    0% { transform: scale(1) translate(0,0) rotate(0deg); }
-    50% { transform: scale(1.15) translate(2%,-2%) rotate(2deg); }
-    100% { transform: scale(1) translate(-2%,2%) rotate(-2deg); }
+  /* большая луна в углу, как на референсе */
+  .big-moon {
+    position: fixed;
+    bottom: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #e8ddc4 0%, #b8ab86 45%, #6b6248 100%);
+    box-shadow: 0 0 60px rgba(212,190,140,0.35), inset -20px -10px 40px rgba(0,0,0,0.4);
+    opacity: 0.5;
+    z-index: 1;
+  }
+
+  .zodiac-ring {
+    position: fixed;
+    top: 8%; right: -80px;
+    width: 240px; height: 240px;
+    border: 1px solid rgba(212,175,122,0.35);
+    border-radius: 50%;
+    opacity: 0.4;
+    z-index: 1;
+  }
+
+  .zodiac-ring::before {
+    content: '';
+    position: absolute;
+    top: 20px; left: 20px; right: 20px; bottom: 20px;
+    border: 1px solid rgba(212,175,122,0.25);
+    border-radius: 50%;
   }
 
   .star {
     position: fixed;
     width: 3px; height: 3px;
-    background: #cfe0ff;
+    background: #f0e2c0;
     border-radius: 50%;
-    box-shadow: 0 0 6px 2px rgba(180,210,255,0.8);
+    box-shadow: 0 0 6px 2px rgba(230,205,160,0.7);
     z-index: 2;
     animation: twinkle 3s ease-in-out infinite;
   }
@@ -69,9 +92,9 @@
   .shooting-star {
     position: fixed;
     width: 2px; height: 2px;
-    background: linear-gradient(-45deg, #bcd6ff, rgba(0,0,0,0));
+    background: linear-gradient(-45deg, #e8d6a0, rgba(0,0,0,0));
     border-radius: 50%;
-    filter: drop-shadow(0 0 6px #bcd6ff);
+    filter: drop-shadow(0 0 6px #e8d6a0);
     z-index: 2;
     opacity: 0;
     animation: shootAcross 7s linear infinite;
@@ -82,7 +105,7 @@
     position: absolute;
     top: 0; left: 0;
     width: 90px; height: 1.5px;
-    background: linear-gradient(90deg, rgba(190,215,255,0.9), transparent);
+    background: linear-gradient(90deg, rgba(232,214,160,0.9), transparent);
     transform: translateX(-90px) rotate(0deg);
   }
 
@@ -97,7 +120,6 @@
     100% { opacity: 0; }
   }
 
-  /* созвездия и пыль по бокам всего экрана, вдоль пустых полей рядом с карточкой */
   .margin-constellation {
     position: fixed;
     top: 0;
@@ -111,7 +133,7 @@
   .margin-constellation.right { right: 0; }
 
   .margin-constellation .branch {
-    stroke: rgba(150,190,255,0.6);
+    stroke: rgba(224,200,150,0.5);
     stroke-width: 1.1;
     fill: none;
     stroke-linecap: round;
@@ -120,19 +142,19 @@
   }
 
   .margin-constellation .node {
-    fill: #d7e6ff;
-    filter: drop-shadow(0 0 7px rgba(150,190,255,1));
+    fill: #ecdcb0;
+    filter: drop-shadow(0 0 7px rgba(224,200,150,0.9));
     animation: marginTwinkle 3s ease-in-out infinite;
   }
 
   .margin-constellation .dust {
-    fill: rgba(190,215,255,0.9);
+    fill: rgba(230,210,165,0.8);
     animation: marginTwinkle 4s ease-in-out infinite;
   }
 
   @keyframes marginFade {
-    0%, 100% { opacity: 0.15; }
-    50%      { opacity: 0.75; }
+    0%, 100% { opacity: 0.12; }
+    50%      { opacity: 0.65; }
   }
 
   @keyframes marginTwinkle {
@@ -140,61 +162,47 @@
     50%      { opacity: 1; }
   }
 
-  .float-number {
-    position: fixed;
-    color: rgba(140,190,255,0.25);
-    font-weight: 700;
-    font-size: 2.2rem;
-    text-shadow: 0 0 12px rgba(100,150,255,0.5);
-    z-index: 2;
-    animation: floatUp 12s linear infinite;
-  }
-
-  @keyframes floatUp {
-    0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-  }
-
   .card {
     position: relative;
     z-index: 3;
     width: 92%;
     max-width: 420px;
-    background: rgba(10, 14, 32, 0.55);
-    border: 1px solid rgba(120,170,255,0.3);
+    background: rgba(16, 16, 24, 0.55);
+    border: 1.5px solid rgba(212,175,122,0.55);
     border-radius: 24px;
-    padding: 32px 24px;
+    padding: 36px 24px 28px;
     text-align: center;
     backdrop-filter: blur(16px);
-    box-shadow: 0 0 45px rgba(60,100,220,0.3);
+    box-shadow: 0 0 45px rgba(212,175,122,0.2), inset 0 0 0 1px rgba(212,175,122,0.15);
     overflow: visible;
     transition: box-shadow 0.6s ease;
   }
 
   .card:hover {
-    box-shadow: 0 0 65px rgba(90,140,255,0.5);
+    box-shadow: 0 0 65px rgba(224,195,140,0.35), inset 0 0 0 1px rgba(212,175,122,0.25);
   }
 
-  .corner-digit {
-    position: absolute;
-    color: rgba(140,190,255,0.35);
-    font-weight: 700;
-    text-shadow: 0 0 10px rgba(120,170,255,0.7);
-    z-index: 1;
-    animation: digitDrift 6s ease-in-out infinite;
+  /* полоска фаз луны вверху карточки, как на референсе */
+  .moon-phases {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 18px;
   }
 
-  @keyframes digitDrift {
-    0%, 100% { opacity: 0.25; transform: translateY(0) scale(1); }
-    50% { opacity: 0.7; transform: translateY(-6px) scale(1.1); }
+  .moon-phases span {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #ecdcb0;
+    opacity: 0.7;
+    box-shadow: 0 0 6px rgba(236,220,176,0.6);
   }
 
-  .corner-digit.tl { top: 6px; left: 8px; font-size: 1.4rem; animation-delay: 0s; }
-  .corner-digit.tr { top: 6px; right: 8px; font-size: 1.2rem; animation-delay: 1s; }
-  .corner-digit.ml { top: 275px; left: 6px; font-size: 1.1rem; animation-delay: 2s; }
-  .corner-digit.mr { top: 275px; right: 6px; font-size: 1.3rem; animation-delay: 0.5s; }
+  .moon-phases span:nth-child(1) { clip-path: inset(0 60% 0 0); }
+  .moon-phases span:nth-child(2) { clip-path: inset(0 30% 0 0); }
+  .moon-phases span:nth-child(3) { }
+  .moon-phases span:nth-child(4) { clip-path: inset(0 0 0 30%); }
+  .moon-phases span:nth-child(5) { clip-path: inset(0 0 0 60%); }
 
   .avatar-deco {
     position: relative;
@@ -210,8 +218,8 @@
     width: 130px; height: 130px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid #6f9dff;
-    box-shadow: 0 0 25px rgba(111,157,255,0.7), 0 0 60px rgba(60,100,220,0.45);
+    border: 3px solid #d4af7a;
+    box-shadow: 0 0 25px rgba(212,175,122,0.6), 0 0 60px rgba(180,150,100,0.4);
     z-index: 2;
   }
 
@@ -236,23 +244,23 @@
 
   @keyframes sideConstFade {
     0%, 100% { opacity: 0.2; }
-    50%      { opacity: 0.95; }
+    50%      { opacity: 0.9; }
   }
 
   .side-constellation .branch {
-    stroke: rgba(150,190,255,0.6);
+    stroke: rgba(224,200,150,0.55);
     stroke-width: 1.2;
     fill: none;
     stroke-linecap: round;
   }
 
   .side-constellation .node {
-    fill: #bcd6ff;
-    filter: drop-shadow(0 0 7px rgba(150,190,255,1));
+    fill: #ecdcb0;
+    filter: drop-shadow(0 0 7px rgba(224,200,150,0.9));
     animation: nodeTwinkle 2.6s ease-in-out infinite;
   }
 
-  .side-constellation .node.big   { fill: #d7e6ff; }
+  .side-constellation .node.big   { fill: #f5e9c8; }
   .side-constellation .node.small { opacity: 0.65; }
 
   .side-constellation .node:nth-child(3) { animation-delay: 0s; }
@@ -268,7 +276,7 @@
   }
 
   .side-constellation .dust {
-    fill: rgba(200,220,255,0.9);
+    fill: rgba(230,212,170,0.9);
     animation: dustBlink 3.4s ease-in-out infinite;
   }
   .side-constellation .dust:nth-child(odd)  { animation-delay: 0.6s; }
@@ -280,48 +288,49 @@
   }
 
   h1 {
-    font-size: 1.4rem;
-    color: #cfe0ff;
-    text-shadow: 0 0 12px rgba(111,157,255,0.6);
+    font-size: 1.6rem;
+    color: #f0dcac;
+    text-shadow: 0 0 14px rgba(212,175,122,0.7);
     margin-top: 6px;
+    letter-spacing: 0.5px;
   }
 
   .subtitle {
-    color: #9db4de;
+    color: #cbb98c;
     font-size: 0.95rem;
     margin-bottom: 14px;
   }
 
   .description {
-    font-size: 0.92rem;
-    color: #c7d4f5;
-    line-height: 1.5;
+    font-size: 0.9rem;
+    color: #ded2b4;
+    line-height: 1.6;
     margin-bottom: 18px;
   }
 
   .lucky-box {
     position: relative;
     margin: 14px auto 24px;
-    padding: 14px 10px;
-    max-width: 260px;
+    padding: 14px 18px;
+    max-width: 280px;
     border-radius: 18px;
-    background: radial-gradient(circle, rgba(60,100,220,0.18) 0%, transparent 75%);
-    border: 1px solid rgba(120,170,255,0.35);
-    box-shadow: 0 0 20px rgba(60,100,220,0.35), inset 0 0 25px rgba(60,100,220,0.15);
+    background: rgba(212,175,122,0.06);
+    border: 1px solid rgba(212,175,122,0.5);
+    box-shadow: 0 0 20px rgba(212,175,122,0.25), inset 0 0 20px rgba(212,175,122,0.08);
   }
 
   .lucky-phrase {
     font-size: 1.05rem;
     font-weight: 700;
     line-height: 1.4;
-    color: #9fc2ff;
-    text-shadow: 0 0 15px rgba(111,157,255,0.8), 0 0 30px rgba(60,100,220,0.5);
+    color: #f0dcac;
+    text-shadow: 0 0 15px rgba(212,175,122,0.8), 0 0 30px rgba(180,150,100,0.5);
     animation: phraseGlow 3s ease-in-out infinite;
   }
 
   @keyframes phraseGlow {
-    0%, 100% { text-shadow: 0 0 12px rgba(111,157,255,0.6), 0 0 25px rgba(60,100,220,0.4); }
-    50% { text-shadow: 0 0 22px rgba(111,157,255,1), 0 0 45px rgba(60,100,220,0.8); }
+    0%, 100% { text-shadow: 0 0 12px rgba(212,175,122,0.6), 0 0 25px rgba(180,150,100,0.4); }
+    50% { text-shadow: 0 0 22px rgba(212,175,122,1), 0 0 45px rgba(180,150,100,0.8); }
   }
 
   .buttons {
@@ -337,9 +346,9 @@
     gap: 8px;
     padding: 12px;
     border-radius: 14px;
-    background: rgba(60,100,220,0.18);
-    border: 1px solid rgba(120,170,255,0.35);
-    color: #dfe8ff;
+    background: rgba(20,20,30,0.6);
+    border: 1px solid rgba(212,175,122,0.4);
+    color: #ecdcb0;
     text-decoration: none;
     font-size: 0.95rem;
     transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
@@ -347,8 +356,8 @@
 
   .btn:hover {
     transform: translateY(-2px);
-    background: rgba(80,130,255,0.28);
-    box-shadow: 0 0 20px rgba(111,157,255,0.6);
+    background: rgba(212,175,122,0.15);
+    box-shadow: 0 0 20px rgba(212,175,122,0.5);
   }
 
   .icon {
@@ -359,18 +368,41 @@
     margin-top: 18px;
     padding: 12px 14px;
     font-size: 0.85rem;
-    color: #c7d4f5;
+    color: #ecdcb0;
     line-height: 1.4;
     border-radius: 14px;
-    background: rgba(60,100,220,0.12);
-    border: 1px solid rgba(120,170,255,0.3);
-    box-shadow: 0 0 15px rgba(60,100,220,0.25);
+    background: rgba(212,175,122,0.06);
+    border: 1px solid rgba(212,175,122,0.4);
+    box-shadow: 0 0 15px rgba(212,175,122,0.2);
+  }
+
+  /* блок с QR-кодом внизу, как на референсе */
+  .qr-block {
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .qr-block img {
+    width: 140px; height: 140px;
+    border-radius: 12px;
+    border: 1px solid rgba(212,175,122,0.4);
+    box-shadow: 0 0 20px rgba(212,175,122,0.3);
+  }
+
+  .qr-caption {
+    font-size: 0.8rem;
+    color: #cbb98c;
+    text-align: center;
+    line-height: 1.4;
   }
 
   footer {
     margin-top: 16px;
     font-size: 0.75rem;
-    color: #7f93c2;
+    color: #a89670;
   }
 </style>
 </head>
@@ -378,12 +410,13 @@
 
 <div class="bg-photo"></div>
 <div class="bg-overlay"></div>
-<div class="smoke"></div>
+<div class="bg-texture"></div>
+<div class="big-moon"></div>
+<div class="zodiac-ring"></div>
 
 <div class="shooting-star one"></div>
 <div class="shooting-star two"></div>
 
-<!-- созвездия вдоль левого и правого пустого поля экрана -->
 <svg class="margin-constellation left" viewBox="0 0 130 800" preserveAspectRatio="none">
   <path class="branch" d="M30 60 C50 90, 40 140, 60 170 C75 190, 70 230, 90 250"/>
   <path class="branch" d="M60 170 C40 190, 30 220, 45 250"/>
@@ -446,10 +479,9 @@
 
 <div class="card">
 
-  <div class="corner-digit tl">✦</div>
-  <div class="corner-digit tr">✧</div>
-  <div class="corner-digit ml">✦</div>
-  <div class="corner-digit mr">✧</div>
+  <div class="moon-phases">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
 
   <div class="avatar-deco">
     <svg class="side-constellation left" viewBox="0 0 110 150">
@@ -498,11 +530,12 @@
 
   <p class="description">
     Дипломированный сертифицированный специалист. Вместе разберём ваши триггеры.
-    Раскроем твои финансы, отношения и предназначение через через астрологию, нумерологию и глубинные трансформационные практики..
+    Раскроем твои финансы, отношения и предназначение через астрологию, нумерологию
+    и глубинные трансформационные практики.
   </p>
 
   <div class="lucky-box">
-    <div class="lucky-phrase">Время менять свою жизнь к лучшему</div>
+    <div class="lucky-phrase">✦ Время менять свою жизнь к лучшему ✦</div>
   </div>
 
   <div class="buttons">
@@ -522,6 +555,11 @@
 
   <div class="gift-note">
     🎁 Имеются подарочные сертификаты на консультацию со мной
+  </div>
+
+  <div class="qr-block">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&color=232-217-176&bgcolor=16-16-24&data=https://t.me/JulyashaS1979" alt="QR-код">
+    <div class="qr-caption">Отсканируй и узнай<br>своё предназначение</div>
   </div>
 
   <footer>© Астронумерология и гипнотерапия</footer>
