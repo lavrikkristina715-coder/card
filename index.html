@@ -9,7 +9,6 @@
 
   body {
     font-family: 'Segoe UI', sans-serif;
-    background: #05060f;
     color: #dfe8ff;
     min-height: 100vh;
     display: flex;
@@ -17,41 +16,28 @@
     align-items: center;
     overflow-x: hidden;
     position: relative;
+    background: #04040a;
   }
 
-  /* фоновый слой 1 — звёздный коллаж */
-  .bg-stars {
+  /* фон — коллаж с луной как основа */
+  .bg-photo {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
     background-image: url('stars-bg.jpg');
     background-size: cover;
     background-position: center;
-    opacity: 0.35;
-    filter: blur(1px) saturate(1.1);
+    filter: saturate(1.1) brightness(0.75);
     z-index: 0;
   }
 
-  /* фоновый слой 2 — текстура из цифр */
-  .bg-numbers {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-image: url('numbers-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.18;
-    mix-blend-mode: screen;
-    z-index: 0;
-  }
-
-  /* синее затемнение сверху для холодного тона */
+  /* синее затемнение для читаемости текста */
   .bg-overlay {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: radial-gradient(circle at 30% 20%, rgba(20,30,70,0.6) 0%, rgba(4,4,10,0.9) 70%);
-    z-index: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(10,15,40,0.55) 0%, rgba(3,3,10,0.85) 75%);
+    z-index: 1;
   }
 
   /* дым */
@@ -59,12 +45,12 @@
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: radial-gradient(circle at 50% 30%, rgba(80,120,200,0.3) 0%, transparent 60%),
-                radial-gradient(circle at 20% 80%, rgba(40,60,120,0.35) 0%, transparent 55%),
-                radial-gradient(circle at 80% 70%, rgba(60,90,160,0.3) 0%, transparent 55%);
+    background: radial-gradient(circle at 50% 30%, rgba(80,120,200,0.25) 0%, transparent 60%),
+                radial-gradient(circle at 20% 80%, rgba(40,60,120,0.3) 0%, transparent 55%),
+                radial-gradient(circle at 80% 70%, rgba(60,90,160,0.25) 0%, transparent 55%);
     filter: blur(45px);
     animation: smokeMove 18s ease-in-out infinite alternate;
-    z-index: 1;
+    z-index: 2;
   }
   @keyframes smokeMove {
     0%   { transform: scale(1) translate(0,0) rotate(0deg); }
@@ -72,14 +58,29 @@
     100% { transform: scale(1) translate(-2%,2%) rotate(-2deg); }
   }
 
+  /* мерцающие звёзды */
+  .star {
+    position: fixed;
+    width: 3px; height: 3px;
+    background: #cfe0ff;
+    border-radius: 50%;
+    box-shadow: 0 0 6px 2px rgba(180,210,255,0.8);
+    z-index: 2;
+    animation: twinkle 3s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50%      { opacity: 1; transform: scale(1.4); }
+  }
+
   /* парящие цифры */
   .float-number {
     position: fixed;
-    color: rgba(140,190,255,0.22);
+    color: rgba(140,190,255,0.25);
     font-weight: 700;
     font-size: 2.2rem;
     text-shadow: 0 0 12px rgba(100,150,255,0.5);
-    z-index: 1;
+    z-index: 2;
     animation: floatUp 12s linear infinite;
   }
   @keyframes floatUp {
@@ -91,7 +92,7 @@
 
   .card {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     width: 92%;
     max-width: 420px;
     background: rgba(10, 14, 32, 0.55);
@@ -117,7 +118,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 55% 20%; /* поднимаем кадр к лицу */
+    object-position: 55% 20%;
   }
 
   h1 {
@@ -160,13 +161,14 @@
     gap: 12px;
   }
 
+  /* кнопки-пилюли, полностью скруглённые */
   .btn {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     padding: 13px;
-    border-radius: 14px;
+    border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.95rem;
@@ -193,10 +195,17 @@
 </head>
 <body>
 
-  <div class="bg-stars"></div>
-  <div class="bg-numbers"></div>
+  <div class="bg-photo"></div>
   <div class="bg-overlay"></div>
   <div class="smoke"></div>
+
+  <div class="star" style="top:10%; left:15%; animation-delay:0s;"></div>
+  <div class="star" style="top:25%; left:70%; animation-delay:0.6s;"></div>
+  <div class="star" style="top:40%; left:35%; animation-delay:1.2s;"></div>
+  <div class="star" style="top:60%; left:85%; animation-delay:1.8s;"></div>
+  <div class="star" style="top:75%; left:20%; animation-delay:2.4s;"></div>
+  <div class="star" style="top:15%; left:50%; animation-delay:1s;"></div>
+  <div class="star" style="top:85%; left:60%; animation-delay:1.5s;"></div>
 
   <div class="float-number" style="left:10%; animation-delay:0s;">6</div>
   <div class="float-number" style="left:35%; animation-delay:3s;">3</div>
@@ -211,7 +220,7 @@
     <div class="subtitle">Астронумеролог · Гипнолог</div>
 
     <p class="description">
-      Сертифицированный специалист. Вместе разберём ваши триггеры.
+      Дипломированный сертифицированный специалист. Вместе разберём ваши триггеры.
       Раскроем твои финансы, отношения и предназначение через астрологию и нумерологию.
     </p>
 
