@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Юлия Стрельченко — Астронумеролог, гипнолог</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #05060f;
+    color: #dfe8ff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* фоновый слой 1 — звёздный коллаж */
+  .bg-stars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url('stars-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.35;
+    filter: blur(1px) saturate(1.1);
+    z-index: 0;
+  }
+
+  /* фоновый слой 2 — текстура из цифр */
+  .bg-numbers {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: url('numbers-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.18;
+    mix-blend-mode: screen;
+    z-index: 0;
+  }
+
+  /* синее затемнение сверху для холодного тона */
+  .bg-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle at 30% 20%, rgba(20,30,70,0.6) 0%, rgba(4,4,10,0.9) 70%);
+    z-index: 0;
+  }
+
+  /* дым */
+  .smoke {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle at 50% 30%, rgba(80,120,200,0.3) 0%, transparent 60%),
+                radial-gradient(circle at 20% 80%, rgba(40,60,120,0.35) 0%, transparent 55%),
+                radial-gradient(circle at 80% 70%, rgba(60,90,160,0.3) 0%, transparent 55%);
+    filter: blur(45px);
+    animation: smokeMove 18s ease-in-out infinite alternate;
+    z-index: 1;
+  }
+  @keyframes smokeMove {
+    0%   { transform: scale(1) translate(0,0) rotate(0deg); }
+    50%  { transform: scale(1.15) translate(2%,-2%) rotate(2deg); }
+    100% { transform: scale(1) translate(-2%,2%) rotate(-2deg); }
+  }
+
+  /* парящие цифры */
+  .float-number {
+    position: fixed;
+    color: rgba(140,190,255,0.22);
+    font-weight: 700;
+    font-size: 2.2rem;
+    text-shadow: 0 0 12px rgba(100,150,255,0.5);
+    z-index: 1;
+    animation: floatUp 12s linear infinite;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  }
+
+  .card {
+    position: relative;
+    z-index: 2;
+    width: 92%;
+    max-width: 420px;
+    background: rgba(10, 14, 32, 0.55);
+    border: 1px solid rgba(120,170,255,0.3);
+    border-radius: 24px;
+    padding: 32px 24px;
+    text-align: center;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 0 45px rgba(60,100,220,0.3);
+  }
+
+  .avatar-wrap {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #6f9dff;
+    box-shadow: 0 0 25px rgba(111,157,255,0.7), 0 0 60px rgba(60,100,220,0.45);
+  }
+
+  .avatar-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 55% 20%; /* поднимаем кадр к лицу */
+  }
+
+  h1 {
+    font-size: 1.4rem;
+    color: #cfe0ff;
+    text-shadow: 0 0 12px rgba(111,157,255,0.6);
+  }
+
+  .subtitle {
+    color: #9db4de;
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+  }
+
+  .description {
+    font-size: 0.92rem;
+    color: #c7d4f5;
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+
+  .lucky-number {
+    display: inline-block;
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: #9fc2ff;
+    text-shadow: 0 0 15px rgba(111,157,255,0.9), 0 0 35px rgba(60,100,220,0.6);
+    margin: 10px 0 22px;
+    animation: pulseGlow 2.5s ease-in-out infinite;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { text-shadow: 0 0 15px rgba(111,157,255,0.7), 0 0 30px rgba(60,100,220,0.5); }
+    50%      { text-shadow: 0 0 25px rgba(111,157,255,1), 0 0 55px rgba(60,100,220,0.9); }
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 13px;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #eaf0ff;
+    background: linear-gradient(135deg, rgba(60,100,220,0.35), rgba(20,30,70,0.6));
+    border: 1px solid rgba(120,170,255,0.4);
+    box-shadow: 0 0 12px rgba(60,100,220,0.4);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .btn:hover, .btn:active {
+    transform: translateY(-2px);
+    box-shadow: 0 0 28px rgba(111,157,255,0.95);
+  }
+
+  .btn span.icon { font-size: 1.1rem; }
+
+  footer {
+    margin-top: 22px;
+    font-size: 0.75rem;
+    color: #6d80ab;
+  }
+</style>
+</head>
+<body>
+
+  <div class="bg-stars"></div>
+  <div class="bg-numbers"></div>
+  <div class="bg-overlay"></div>
+  <div class="smoke"></div>
+
+  <div class="float-number" style="left:10%; animation-delay:0s;">6</div>
+  <div class="float-number" style="left:35%; animation-delay:3s;">3</div>
+  <div class="float-number" style="left:60%; animation-delay:6s;">8</div>
+  <div class="float-number" style="left:80%; animation-delay:9s;">9</div>
+
+  <div class="card">
+    <div class="avatar-wrap">
+      <img src="avatar.jpg" alt="Юлия Стрельченко">
+    </div>
+    <h1>Юлия Стрельченко</h1>
+    <div class="subtitle">Астронумеролог · Гипнолог</div>
+
+    <p class="description">
+      Сертифицированный специалист. Вместе разберём ваши триггеры.
+      Раскроем твои финансы, отношения и предназначение через астрологию и нумерологию.
+    </p>
+
+    <div class="lucky-number">6389</div>
+
+    <div class="buttons">
+      <a class="btn" href="https://t.me/JulyashaS1979" target="_blank">
+        <span class="icon">✈️</span> Telegram
+      </a>
+      <a class="btn" href="https://wa.me/qr/BKM2DSAHJ724D1" target="_blank">
+        <span class="icon">💬</span> WhatsApp
+      </a>
+      <a class="btn" href="https://vk.ru/id254308364" target="_blank">
+        <span class="icon">🔷</span> ВКонтакте
+      </a>
+      <a class="btn" href="https://instagram.com/juliy_strelchenko" target="_blank">
+        <span class="icon">📸</span> Instagram
+      </a>
+    </div>
+
+    <footer>© Астронумерология и гипнотерапия</footer>
+  </div>
+
+</body>
+</html>
