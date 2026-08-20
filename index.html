@@ -85,6 +85,32 @@
     100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
   }
 
+  /* созвездие, плавно проявляется и исчезает */
+  .constellation {
+    position: fixed;
+    top: 3%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 140px;
+    z-index: 2;
+    opacity: 0;
+    animation: constellationFade 10s ease-in-out infinite;
+  }
+  @keyframes constellationFade {
+    0%, 100% { opacity: 0; }
+    30%      { opacity: 0.9; }
+    70%      { opacity: 0.9; }
+  }
+  .constellation circle {
+    fill: #bcd6ff;
+    filter: drop-shadow(0 0 4px rgba(150,190,255,0.9));
+  }
+  .constellation line {
+    stroke: rgba(150,190,255,0.5);
+    stroke-width: 1;
+  }
+
   .card {
     position: relative;
     z-index: 3;
@@ -100,7 +126,24 @@
     overflow: visible;
   }
 
-  /* декоративная зона над аватаром с завитками-свечением */
+  /* случайные декоративные цифры в пустых углах карточки */
+  .corner-digit {
+    position: absolute;
+    color: rgba(140,190,255,0.35);
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(120,170,255,0.7);
+    z-index: 1;
+    animation: digitDrift 6s ease-in-out infinite;
+  }
+  @keyframes digitDrift {
+    0%, 100% { opacity: 0.25; transform: translateY(0) scale(1); }
+    50%      { opacity: 0.7; transform: translateY(-6px) scale(1.1); }
+  }
+  .corner-digit.tl { top: 6px;  left: 8px;  font-size: 1.4rem; animation-delay: 0s; }
+  .corner-digit.tr { top: 6px;  right: 8px; font-size: 1.2rem; animation-delay: 1s; }
+  .corner-digit.ml { top: 275px; left: 6px; font-size: 1.1rem; animation-delay: 2s; }
+  .corner-digit.mr { top: 275px; right: 6px; font-size: 1.3rem; animation-delay: 0.5s; }
+
   .avatar-deco {
     position: relative;
     width: 100%;
@@ -129,7 +172,6 @@
     object-position: 55% 20%;
   }
 
-  /* светящиеся завитки по бокам аватара, вместо красных — холодные синие */
   .swirl {
     position: absolute;
     top: 0;
@@ -168,7 +210,6 @@
     margin-bottom: 18px;
   }
 
-  /* вставка с числом — теперь как отдельная светящаяся плашка */
   .lucky-box {
     position: relative;
     margin: 14px auto 24px;
@@ -253,6 +294,20 @@
   <div class="bg-overlay"></div>
   <div class="smoke"></div>
 
+  <svg class="constellation" viewBox="0 0 300 140">
+    <line x1="20" y1="100" x2="70" y2="40"/>
+    <line x1="70" y1="40" x2="140" y2="60"/>
+    <line x1="140" y1="60" x2="200" y2="20"/>
+    <line x1="200" y1="20" x2="260" y2="70"/>
+    <line x1="140" y1="60" x2="150" y2="110"/>
+    <circle cx="20" cy="100" r="2.5"/>
+    <circle cx="70" cy="40" r="2.5"/>
+    <circle cx="140" cy="60" r="3"/>
+    <circle cx="200" cy="20" r="2.5"/>
+    <circle cx="260" cy="70" r="2.5"/>
+    <circle cx="150" cy="110" r="2"/>
+  </svg>
+
   <div class="star" style="top:10%; left:15%; animation-delay:0s;"></div>
   <div class="star" style="top:25%; left:70%; animation-delay:0.6s;"></div>
   <div class="star" style="top:40%; left:35%; animation-delay:1.2s;"></div>
@@ -267,6 +322,12 @@
   <div class="float-number" style="left:80%; animation-delay:9s;">9</div>
 
   <div class="card">
+
+    <div class="corner-digit tl">4</div>
+    <div class="corner-digit tr">7</div>
+    <div class="corner-digit ml">2</div>
+    <div class="corner-digit mr">5</div>
+
     <div class="avatar-deco">
       <svg class="swirl left" viewBox="0 0 90 130" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M85 20 C60 5, 30 5, 20 25 C10 45, 25 60, 40 55 C55 50, 55 35, 40 32 C28 30, 20 40, 25 50"
