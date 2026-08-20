@@ -112,6 +112,22 @@
     animation-delay: 2s;
   }
 
+  .planet.five {
+    top: 44%; left: -20px;
+    width: 34px; height: 34px;
+    background: radial-gradient(circle at 30% 30%, #9fe0c8 0%, #4fa885 55%, #1f5240 100%);
+    box-shadow: 0 0 20px rgba(140,220,190,0.5);
+    animation-delay: 6s;
+  }
+
+  .planet.six {
+    top: 90%; right: 8%;
+    width: 26px; height: 26px;
+    background: radial-gradient(circle at 30% 30%, #f0c9e0 0%, #b86fa0 55%, #5c2e50 100%);
+    box-shadow: 0 0 18px rgba(230,160,210,0.5);
+    animation-delay: 10s;
+  }
+
   @keyframes planetFloat {
     0%, 100% { transform: translateY(0) rotate(0deg); }
     50%      { transform: translateY(-20px) rotate(6deg); }
@@ -201,21 +217,24 @@
     100% { opacity: 0; }
   }
 
+  /* цифры, всплывающие по очереди со свечением */
   .float-number {
     position: fixed;
-    color: rgba(212,175,122,0.35);
+    color: rgba(212,175,122,0.4);
     font-weight: 700;
     font-size: 1.6rem;
     text-shadow: 0 0 12px rgba(212,175,122,0.5);
     z-index: 2;
-    animation: floatUp 14s linear infinite;
+    opacity: 0;
+    animation: floatUp 14s ease-in-out infinite;
   }
 
   @keyframes floatUp {
-    0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-    10%  { opacity: 1; }
-    90%  { opacity: 1; }
-    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    0%   { transform: translateY(0) scale(0.9); opacity: 0; }
+    8%   { opacity: 0.9; text-shadow: 0 0 20px rgba(212,175,122,1); }
+    20%  { transform: translateY(-40vh) scale(1.05); opacity: 0.7; }
+    35%  { opacity: 0; }
+    100% { opacity: 0; }
   }
 
   .margin-constellation {
@@ -289,26 +308,46 @@
     box-shadow: 0 0 65px rgba(90,120,220,0.5), inset 0 0 0 1px rgba(212,175,122,0.3);
   }
 
+  /* полный лунный цикл, 8 фаз */
   .moon-phases {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
     margin-bottom: 18px;
+    flex-wrap: nowrap;
   }
 
   .moon-phases span {
-    width: 14px; height: 14px;
+    width: 15px; height: 15px;
     border-radius: 50%;
     background: #ecdcb0;
-    opacity: 0.75;
-    box-shadow: 0 0 6px rgba(236,220,176,0.6);
+    opacity: 0.8;
+    box-shadow: 0 0 8px rgba(236,220,176,0.7);
+    animation: moonGlow 6s ease-in-out infinite;
   }
 
-  .moon-phases span:nth-child(1) { clip-path: inset(0 60% 0 0); }
-  .moon-phases span:nth-child(2) { clip-path: inset(0 30% 0 0); }
-  .moon-phases span:nth-child(3) { }
-  .moon-phases span:nth-child(4) { clip-path: inset(0 0 0 30%); }
-  .moon-phases span:nth-child(5) { clip-path: inset(0 0 0 60%); }
+  .moon-phases span:nth-child(1)  { clip-path: circle(0% at 50% 50%); }
+  .moon-phases span:nth-child(2)  { clip-path: inset(0 75% 0 0); }
+  .moon-phases span:nth-child(3)  { clip-path: inset(0 50% 0 0); }
+  .moon-phases span:nth-child(4)  { clip-path: inset(0 25% 0 0); }
+  .moon-phases span:nth-child(5)  { }
+  .moon-phases span:nth-child(6)  { clip-path: inset(0 0 0 25%); }
+  .moon-phases span:nth-child(7)  { clip-path: inset(0 0 0 50%); }
+  .moon-phases span:nth-child(8)  { clip-path: inset(0 0 0 75%); }
+
+  .moon-phases span:nth-child(1) { animation-delay: 0s; }
+  .moon-phases span:nth-child(2) { animation-delay: 0.75s; }
+  .moon-phases span:nth-child(3) { animation-delay: 1.5s; }
+  .moon-phases span:nth-child(4) { animation-delay: 2.25s; }
+  .moon-phases span:nth-child(5) { animation-delay: 3s; }
+  .moon-phases span:nth-child(6) { animation-delay: 3.75s; }
+  .moon-phases span:nth-child(7) { animation-delay: 4.5s; }
+  .moon-phases span:nth-child(8) { animation-delay: 5.25s; }
+
+  @keyframes moonGlow {
+    0%, 100% { opacity: 0.55; }
+    50%      { opacity: 1; }
+  }
 
   .avatar-deco {
     position: relative;
@@ -337,24 +376,24 @@
 
   .side-constellation {
     position: absolute;
-    top: -10px;
-    width: 110px;
-    height: 150px;
+    top: -20px;
+    width: 140px;
+    height: 190px;
     z-index: 1;
     opacity: 0;
     animation: sideConstFade 6s ease-in-out infinite;
   }
 
-  .side-constellation.left  { left: -4%; animation-delay: 0s; }
-  .side-constellation.right { right: -4%; animation-delay: 1.8s; }
+  .side-constellation.left  { left: -22%; animation-delay: 0s; }
+  .side-constellation.right { right: -22%; animation-delay: 1.8s; }
 
   @keyframes sideConstFade {
-    0%, 100% { opacity: 0.2; }
-    50%      { opacity: 0.9; }
+    0%, 100% { opacity: 0.25; }
+    50%      { opacity: 0.95; }
   }
 
   .side-constellation .branch {
-    stroke: rgba(224,200,150,0.55);
+    stroke: rgba(224,200,150,0.6);
     stroke-width: 1.2;
     fill: none;
     stroke-linecap: round;
@@ -362,27 +401,29 @@
 
   .side-constellation .node {
     fill: #ecdcb0;
-    filter: drop-shadow(0 0 7px rgba(224,200,150,0.9));
+    filter: drop-shadow(0 0 8px rgba(224,200,150,1));
     animation: nodeTwinkle 2.6s ease-in-out infinite;
   }
 
   .side-constellation .node.big   { fill: #f5e9c8; }
   .side-constellation .node.small { opacity: 0.65; }
 
-  .side-constellation .node:nth-child(3) { animation-delay: 0s; }
-  .side-constellation .node:nth-child(4) { animation-delay: 0.4s; }
-  .side-constellation .node:nth-child(5) { animation-delay: 0.8s; }
-  .side-constellation .node:nth-child(6) { animation-delay: 1.2s; }
-  .side-constellation .node:nth-child(7) { animation-delay: 1.6s; }
-  .side-constellation .node:nth-child(8) { animation-delay: 2s; }
+  .side-constellation .node:nth-child(3)  { animation-delay: 0s; }
+  .side-constellation .node:nth-child(4)  { animation-delay: 0.4s; }
+  .side-constellation .node:nth-child(5)  { animation-delay: 0.8s; }
+  .side-constellation .node:nth-child(6)  { animation-delay: 1.2s; }
+  .side-constellation .node:nth-child(7)  { animation-delay: 1.6s; }
+  .side-constellation .node:nth-child(8)  { animation-delay: 2s; }
+  .side-constellation .node:nth-child(9)  { animation-delay: 2.4s; }
+  .side-constellation .node:nth-child(10) { animation-delay: 2.8s; }
 
   @keyframes nodeTwinkle {
     0%, 100% { opacity: 0.4; r: 1.8; }
-    50%      { opacity: 1;   r: 3.2; }
+    50%      { opacity: 1;   r: 3.4; }
   }
 
   .side-constellation .dust {
-    fill: rgba(230,212,170,0.9);
+    fill: rgba(230,212,170,0.95);
     animation: dustBlink 3.4s ease-in-out infinite;
   }
   .side-constellation .dust:nth-child(odd)  { animation-delay: 0.6s; }
@@ -392,6 +433,39 @@
     0%, 100% { opacity: 0.2; }
     50%      { opacity: 0.9; }
   }
+
+  /* верхние угловые созвездия карточки, замена завиткам на скрине */
+  .corner-constellation {
+    position: absolute;
+    width: 120px;
+    height: 150px;
+    z-index: 1;
+    opacity: 0;
+    animation: cornerFade 7s ease-in-out infinite;
+  }
+
+  .corner-constellation.tl { top: 4px; left: -18px; animation-delay: 0.5s; }
+  .corner-constellation.tr { top: 4px; right: -18px; animation-delay: 2s; }
+
+  @keyframes cornerFade {
+    0%, 100% { opacity: 0.2; }
+    50%      { opacity: 0.85; }
+  }
+
+  .corner-constellation .branch {
+    stroke: rgba(224,200,150,0.55);
+    stroke-width: 1.1;
+    fill: none;
+    stroke-linecap: round;
+  }
+
+  .corner-constellation .node {
+    fill: #ecdcb0;
+    filter: drop-shadow(0 0 7px rgba(224,200,150,0.9));
+    animation: nodeTwinkle 2.8s ease-in-out infinite;
+  }
+
+  .corner-constellation .node.big { fill: #f5e9c8; }
 
   h1 {
     font-size: 1.6rem;
@@ -510,6 +584,8 @@
 <div class="planet two"></div>
 <div class="planet three"></div>
 <div class="planet four"></div>
+<div class="planet five"></div>
+<div class="planet six"></div>
 
 <div class="zodiac-ring"></div>
 <div class="zodiac-ring two"></div>
@@ -519,13 +595,16 @@
 <div class="shooting-star three"></div>
 <div class="shooting-star four"></div>
 
-<div class="float-number" style="left:8%;  animation-delay:0s;">7</div>
-<div class="float-number" style="left:22%; animation-delay:3s;">3</div>
-<div class="float-number" style="left:38%; animation-delay:6s;">9</div>
-<div class="float-number" style="left:55%; animation-delay:1.5s;">1</div>
-<div class="float-number" style="left:70%; animation-delay:4.5s;">5</div>
-<div class="float-number" style="left:85%; animation-delay:8s;">8</div>
-<div class="float-number" style="left:92%; animation-delay:2.5s;">4</div>
+<div class="float-number" style="left:6%;  top:80%; animation-delay:0s;">7</div>
+<div class="float-number" style="left:18%; top:85%; animation-delay:2s;">3</div>
+<div class="float-number" style="left:32%; top:78%; animation-delay:4s;">9</div>
+<div class="float-number" style="left:50%; top:88%; animation-delay:6s;">1</div>
+<div class="float-number" style="left:64%; top:82%; animation-delay:8s;">5</div>
+<div class="float-number" style="left:78%; top:86%; animation-delay:10s;">8</div>
+<div class="float-number" style="left:90%; top:80%; animation-delay:12s;">4</div>
+<div class="float-number" style="left:40%; top:84%; animation-delay:1s;">2</div>
+<div class="float-number" style="left:12%; top:76%; animation-delay:5s;">6</div>
+<div class="float-number" style="left:85%; top:78%; animation-delay:9s;">0</div>
 
 <svg class="margin-constellation left" viewBox="0 0 130 800" preserveAspectRatio="none">
   <path class="branch" d="M30 60 C50 90, 40 140, 60 170 C75 190, 70 230, 90 250"/>
@@ -594,52 +673,83 @@
 <div class="star big" style="top:20%; left:5%;  animation-delay:2.2s;"></div>
 <div class="star"     style="top:55%; left:65%; animation-delay:1.1s;"></div>
 <div class="star"     style="top:38%; left:78%; animation-delay:0.4s;"></div>
+<div class="star big" style="top:12%; left:28%; animation-delay:1.4s;"></div>
+<div class="star"     style="top:65%; left:12%; animation-delay:0.7s;"></div>
+<div class="star"     style="top:80%; left:75%; animation-delay:2.6s;"></div>
+<div class="star"     style="top:28%; left:15%; animation-delay:0.2s;"></div>
+<div class="star big" style="top:92%; left:88%; animation-delay:1.9s;"></div>
 
 <div class="card">
 
+  <div class="corner-constellation tl">
+    <svg viewBox="0 0 120 150">
+      <path class="branch" d="M20 130 C35 110, 25 85, 45 70 C58 60, 55 40, 75 30"/>
+      <path class="branch" d="M45 70 C60 78, 70 90, 85 82"/>
+      <circle class="node big" cx="20" cy="130" r="2.8"/>
+      <circle class="node"     cx="45" cy="70"  r="2.4"/>
+      <circle class="node"     cx="75" cy="30"  r="2.2"/>
+      <circle class="node"     cx="85" cy="82"  r="1.8"/>
+    </svg>
+  </div>
+
+  <div class="corner-constellation tr">
+    <svg viewBox="0 0 120 150">
+      <path class="branch" d="M100 130 C85 110, 95 85, 75 70 C62 60, 65 40, 45 30"/>
+      <path class="branch" d="M75 70 C60 78, 50 90, 35 82"/>
+      <circle class="node big" cx="100" cy="130" r="2.8"/>
+      <circle class="node"     cx="75"  cy="70"  r="2.4"/>
+      <circle class="node"     cx="45"  cy="30"  r="2.2"/>
+      <circle class="node"     cx="35"  cy="82"  r="1.8"/>
+    </svg>
+  </div>
+
   <div class="moon-phases">
-    <span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
   </div>
 
   <div class="avatar-deco">
-    <svg class="side-constellation left" viewBox="0 0 110 150">
-      <path class="branch" d="M20 130 C25 110, 15 95, 30 80 C40 68, 55 72, 60 55 C63 45, 55 35, 65 22"/>
-      <path class="branch" d="M30 80 C45 85, 55 95, 70 90"/>
-      <path class="branch" d="M60 55 C70 58, 80 50, 85 60"/>
+    <svg class="side-constellation left" viewBox="0 0 140 190">
+      <path class="branch" d="M25 165 C30 145, 20 125, 40 105 C52 92, 68 96, 75 78 C79 66, 68 55, 82 40 C88 33, 95 25, 105 12"/>
+      <path class="branch" d="M40 105 C58 110, 70 122, 88 116"/>
+      <path class="branch" d="M75 78 C88 82, 100 72, 108 84"/>
 
-      <circle class="node big"   cx="20" cy="130" r="3"/>
-      <circle class="node"       cx="30" cy="80"  r="2.5"/>
-      <circle class="node big"   cx="60" cy="55"  r="3.2"/>
-      <circle class="node"       cx="65" cy="22"  r="2"/>
-      <circle class="node small" cx="70" cy="90"  r="1.6"/>
-      <circle class="node small" cx="85" cy="60"  r="1.6"/>
+      <circle class="node big"   cx="25"  cy="165" r="3"/>
+      <circle class="node"       cx="40"  cy="105" r="2.6"/>
+      <circle class="node big"   cx="75"  cy="78"  r="3.2"/>
+      <circle class="node"       cx="82"  cy="40"  r="2.2"/>
+      <circle class="node small" cx="105" cy="12"  r="1.8"/>
+      <circle class="node small" cx="88"  cy="116" r="1.6"/>
+      <circle class="node small" cx="108" cy="84"  r="1.6"/>
 
-      <circle class="dust" cx="12" cy="105" r="1"/>
-      <circle class="dust" cx="45" cy="65"  r="0.8"/>
-      <circle class="dust" cx="75" cy="35"  r="1"/>
-      <circle class="dust" cx="90" cy="80"  r="0.8"/>
+      <circle class="dust" cx="15"  cy="130" r="1"/>
+      <circle class="dust" cx="55"  cy="90"  r="0.9"/>
+      <circle class="dust" cx="90"  cy="55"  r="1"/>
+      <circle class="dust" cx="115" cy="100" r="0.9"/>
+      <circle class="dust" cx="60"  cy="30"  r="0.8"/>
     </svg>
 
     <div class="avatar-wrap">
       <img src="avatar.jpg" alt="Юлия Стрельченко">
     </div>
 
-    <svg class="side-constellation right" viewBox="0 0 110 150">
-      <path class="branch" d="M90 130 C85 110, 95 95, 80 80 C70 68, 55 72, 50 55 C47 45, 55 35, 45 22"/>
-      <path class="branch" d="M80 80 C65 85, 55 95, 40 90"/>
-      <path class="branch" d="M50 55 C40 58, 30 50, 25 60"/>
+    <svg class="side-constellation right" viewBox="0 0 140 190">
+      <path class="branch" d="M115 165 C110 145, 120 125, 100 105 C88 92, 72 96, 65 78 C61 66, 72 55, 58 40 C52 33, 45 25, 35 12"/>
+      <path class="branch" d="M100 105 C82 110, 70 122, 52 116"/>
+      <path class="branch" d="M65 78 C52 82, 40 72, 32 84"/>
 
-      <circle class="node big"   cx="90" cy="130" r="3"/>
-      <circle class="node"       cx="80" cy="80"  r="2.5"/>
-      <circle class="node big"   cx="50" cy="55"  r="3.2"/>
-      <circle class="node"       cx="45" cy="22"  r="2"/>
-      <circle class="node small" cx="40" cy="90"  r="1.6"/>
-      <circle class="node small" cx="25" cy="60"  r="1.6"/>
+      <circle class="node big"   cx="115" cy="165" r="3"/>
+      <circle class="node"       cx="100" cy="105" r="2.6"/>
+      <circle class="node big"   cx="65"  cy="78"  r="3.2"/>
+      <circle class="node"       cx="58"  cy="40"  r="2.2"/>
+      <circle class="node small" cx="35"  cy="12"  r="1.8"/>
+      <circle class="node small" cx="52"  cy="116" r="1.6"/>
+      <circle class="node small" cx="32"  cy="84"  r="1.6"/>
 
-      <circle class="dust" cx="98" cy="105" r="1"/>
-      <circle class="dust" cx="65" cy="65"  r="0.8"/>
-      <circle class="dust" cx="35" cy="35"  r="1"/>
-      <circle class="dust" cx="20" cy="80"  r="0.8"/>
+      <circle class="dust" cx="125" cy="130" r="1"/>
+      <circle class="dust" cx="85"  cy="90"  r="0.9"/>
+      <circle class="dust" cx="50"  cy="55"  r="1"/>
+      <circle class="dust" cx="25"  cy="100" r="0.9"/>
+      <circle class="dust" cx="80"  cy="30"  r="0.8"/>
     </svg>
   </div>
 
